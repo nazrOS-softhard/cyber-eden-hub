@@ -122,7 +122,7 @@ export const Route = createFileRoute("/market")({
         subtitle="ЭКОСИСТЕМА NAZROS — ПОДДЕРЖИВАЙ РАЗРАБОТЧИКОВ"
       >
         {/* Фильтры — сдвинуты ниже и активны */}
-        <div className="flex flex-wrap gap-4 mb-12 justify-center mt-8">
+        <div className="flex flex-wrap gap-4 mb-12 justify-center mt-24">
           {["ВСЕ ИНВЕНТАРЬ", "УСТРОЙСТВА", "СОФТ", "OS BUILDER"].map((cat) => (
             <button
               key={cat}
