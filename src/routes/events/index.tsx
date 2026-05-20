@@ -83,11 +83,11 @@ export const Route = createFileRoute("/events")({
 
     return (
       <PageShell
-        tag="ХАКАТОНЫ • МИТАПЫ • СХОДКИ"
-        title={<><span className="text-cyan">СОБЫ</span>ТИЯ</>}
-        subtitle="ПОДКЛЮЧАЙСЯ К ЛОКАЛЬНОЙ СЕТИ"
+        tag="EVENTS • CALENDAR SYNC"
+        title={<><span className="text-acid">СОБЫ</span>ТИЯ</>}
+        subtitle="МИТАПЫ • ХАКАТОНЫ • ТУРНИРЫ"
       >
-        {/* Фильтр по типу */}
+        {/* Фильтр (появляется сразу) */}
         <div className="flex flex-wrap gap-3 mb-8 justify-center">
           {["Все", "ХАКАТОН", "OFFLINE", "ONLINE"].map((type) => (
             <button
@@ -104,12 +104,19 @@ export const Route = createFileRoute("/events")({
           ))}
         </div>
 
-        {/* Сетка событий */}
-        <div className="flex flex-col gap-4 max-w-5xl mx-auto w-full">
+        {/* Сетка событий — появляется с задержкой */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="flex flex-col gap-4 max-w-5xl mx-auto w-full"
+        >
           {filteredEvents.map((event) => (
             <motion.div
               key={event.id}
-              whileHover={{ scale: 1.005 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * event.id, duration: 0.5 }}
               className="group flex flex-col md:flex-row items-stretch bg-[#0d0d0d] border border-gray-800 rounded overflow-hidden hover:border-[var(--neon)]/50 transition-all"
             >
               {/* Левая часть: дата */}
@@ -148,7 +155,7 @@ export const Route = createFileRoute("/events")({
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </PageShell>
     );
   },
