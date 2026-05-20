@@ -3,113 +3,6 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 
-// Категории товаров (как на скриншоте)
-const categories = ["ВСЕ ИНВЕНТАРЬ", "УСТРОЙСТВА", "СОФТ", "OS BUILDER"];
-
-// Данные продуктов (с точными названиями файлов из public/market/)
-const products = [
-  {
-    id: 1,
-    name: "CyberDeck Pro X1",
-    description: "Ноутбук с открытым железом для хакеров и разработчиков. Coreboot, открытые драйверы.",
-    price: 89900,
-    category: "УСТРОЙСТВА",
-    type: "DEVICE",
-    image: "/market/clon.png",
-    inStock: true,
-  },
-  {
-    id: 2,
-    name: "NullPhone v2",
-    description: "Смартфон с открытым исходным кодом. GrapheneOS из коробки, физические переключатели.",
-    price: 34900,
-    category: "УСТРОЙСТВА",
-    type: "DEVICE",
-    image: "/market/grothN.png",
-    inStock: true,
-  },
-  {
-    id: 3,
-    name: "PITerminal Kit",
-    description: "Портативный хакинг-компьютер на базе RPi5. Предустановлен Kali Linux с необходимыми инструментами.",
-    price: 12900,
-    category: "УСТРОЙСТВА",
-    type: "DEVICE",
-    image: "/market/biohN.png",
-    inStock: true,
-  },
-  {
-    id: 4,
-    name: "nazrOS Core",
-    description: "Основной дистрибутив экосистемы nazrOS. Arch-based, оптимизирован для кибербезопасности.",
-    price: 0,
-    category: "OS BUILDER",
-    type: "OS",
-    image: "/market/pin.png",
-    inStock: true,
-  },
-  {
-    id: 5,
-    name: "nazrOS Sleath",
-    description: "Privacy-first дистрибутив с hardened ядром. Tor, amnesia, полная анонимность.",
-    price: 0,
-    category: "OS BUILDER",
-    type: "OS",
-    image: "/market/pin.png",
-    inStock: true,
-  },
-  {
-    id: 6,
-    name: "nazrOS Dev Edition",
-    description: "Версия для разработчиков с предустановленными IDE, компиляторами и dev-инструментами.",
-    price: 0,
-    category: "OS BUILDER",
-    type: "OS",
-    image: "/market/pin.png",
-    inStock: true,
-  },
-  {
-    id: 7,
-    name: "CipherScan Pro",
-    description: "Десктоп-утилита для пентеста и анализа кода. Сканирование уязвимостей, анализ трафика.",
-    price: 4900,
-    category: "СОФТ",
-    type: "SOFTWARE",
-    image: "/market/blaN.png",
-    inStock: true,
-  },
-  {
-    id: 8,
-    name: "PixelForge Studio",
-    description: "Редактор для создания пиксельной графики, иконок и интерфейсов в стиле киберпанк.",
-    price: 2900,
-    category: "СОФТ",
-    type: "SOFTWARE",
-    image: "/market/blaN.png",
-    inStock: true,
-  },
-  {
-    id: 9,
-    name: "DataVault",
-    description: "Персональный менеджер паролей с E2E шифрованием, биометрической аутентификацией.",
-    price: 1900,
-    category: "СОФТ",
-    type: "SOFTWARE",
-    image: "/market/blaN.png",
-    inStock: true,
-  },
-  {
-    id: 10,
-    name: "NetWatch Dashboard",
-    description: "Панель управления сетью с анализом трафика, обнаружением вторжений и мониторингом.",
-    price: 3500,
-    category: "СОФТ",
-    type: "SOFTWARE",
-    image: "/market/blaN.png",
-    inStock: true,
-  },
-];
-
 export const Route = createFileRoute("/market")({
   component: () => {
     const [selectedCategory, setSelectedCategory] = useState("ВСЕ ИНВЕНТАРЬ");
@@ -120,13 +13,18 @@ export const Route = createFileRoute("/market")({
 
     return (
       <PageShell
-        tag="МАРКЕТПЛЕЙС // ЦИФРОВЫЕ ПРОДУКТЫ"
+        tag="МАРКЕТПЛЕЙС"
         title={<><span className="text-neon">МАР</span>КЕТ</>}
-        subtitle="ЭКОСИСТЕМА NAZROS — ПОДДЕРЖИВАЙ РАЗРАБОТЧИКОВ"
+        subtitle="ЦИФРОВЫЕ ПРОДУКТЫ И УСТРОЙСТВА"
       >
-        {/* Фильтр по категориям */}
-        <div className="flex flex-wrap gap-4 mb-8 justify-center">
-          {categories.map((cat) => (
+        {/* Фильтр — появляется сразу */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-wrap gap-4 mb-8 justify-center"
+        >
+          {["ВСЕ ИНВЕНТАРЬ", "УСТРОЙСТВА", "СОФТ", "OS BUILDER"].map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
@@ -139,14 +37,21 @@ export const Route = createFileRoute("/market")({
               {cat}
             </button>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Сетка товаров */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        {/* Сетка товаров — появляется при скролле */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
           {filteredProducts.map((product) => (
             <motion.div
               key={product.id}
-              whileHover={{ scale: 1.01 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * product.id, duration: 0.5 }}
               className="group flex flex-col bg-[#0d0d0d] border border-gray-800 rounded overflow-hidden hover:border-[var(--neon)]/50 transition-all"
             >
               {/* Картинка товара */}
@@ -175,7 +80,7 @@ export const Route = createFileRoute("/market")({
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </PageShell>
     );
   },
