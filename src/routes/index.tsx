@@ -87,12 +87,12 @@ function Landing() {
           transition={{ delay: 1.2, duration: 0.6 }}
           className="mt-8 flex flex-wrap items-center justify-center gap-3"
         >
-          <button className="group relative overflow-hidden rounded-full border border-[var(--neon)] bg-[var(--neon)]/15 px-6 py-2.5 text-xs uppercase tracking-[0.25em] text-foreground shadow-[0_0_24px_var(--neon)]/40 transition-all hover:bg-[var(--neon)]/30 hover:shadow-[0_0_36px_var(--neon)]/70">
+          <Link to="/login" className="group relative overflow-hidden rounded-full border border-[var(--neon)] bg-[var(--neon)]/15 px-6 py-2.5 text-xs uppercase tracking-[0.25em] text-foreground shadow-[0_0_24px_var(--neon)]/40 transition-all hover:bg-[var(--neon)]/30 hover:shadow-[0_0_36px_var(--neon)]/70">
             войти в систему
-          </button>
-          <button className="rounded-full border border-border bg-background/40 px-6 py-2.5 text-xs uppercase tracking-[0.25em] text-foreground/80 backdrop-blur-xl transition-colors hover:border-[var(--cyan)] hover:text-cyan">
+          </Link>
+          <Link to="/journal" className="rounded-full border border-border bg-background/40 px-6 py-2.5 text-xs uppercase tracking-[0.25em] text-foreground/80 backdrop-blur-xl transition-colors hover:border-[var(--cyan)] hover:text-cyan">
             смотреть журнал
-          </button>
+          </Link>
         </motion.div>
       </main>
 
