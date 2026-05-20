@@ -30,19 +30,21 @@ export function TopNav() {
             className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
             {/* Logo top-left — neon star */}
-            <Link to="/" className="group flex items-center gap-3">
-              <div className="relative grid h-10 w-10 place-items-center rounded-full border border-[var(--neon)]/60 bg-background/40 backdrop-blur-md shadow-[0_0_24px_var(--neon)]/50 transition-all group-hover:shadow-[0_0_32px_var(--neon)]">
-                <svg viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-[var(--neon)]" strokeWidth="2" strokeLinejoin="round">
-                  <path d="M12 2 14.4 9.2 22 9.6 16.2 14.4 18 22 12 17.8 6 22 7.8 14.4 2 9.6 9.6 9.2Z" />
-                </svg>
-              </div>
-              <div className="hidden sm:block">
-                <div className="font-mono text-[9px] tracking-[0.35em] text-foreground/50">NAZROS // OS</div>
-                <div className="font-display text-base font-bold leading-none tracking-tight">
-                  киберэдэ<span className="text-neon">Н</span>
-                </div>
-              </div>
-            </Link>
+          <Link to="/" className="group flex items-center gap-3">
+  <div className="relative h-10 w-10">
+    <img
+      src="/nazros-logo.png"
+      alt="Сурикен nazrOS"
+      className="h-full w-full object-contain drop-shadow-[0_0_20px_var(--neon)]/30 transition-all group-hover:drop-shadow-[0_0_40px_var(--neon)]/60"
+    />
+  </div>
+  <div className="hidden sm:block">
+    <div className="font-mono text-[9px] tracking-[0.35em] text-foreground/50">NAZROS // OS</div>
+    <div className="font-display text-base font-bold leading-none tracking-tight">
+      киберэдэ<span className="text-neon">Н</span>
+    </div>
+  </div>
+</Link>
 
             {/* Center nav */}
             <nav className="pointer-events-auto hidden items-center gap-1 rounded-full border border-border bg-background/30 px-2 py-1.5 backdrop-blur-xl md:flex">
