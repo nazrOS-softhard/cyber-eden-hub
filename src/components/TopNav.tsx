@@ -29,24 +29,58 @@ export function TopNav() {
             transition={{ duration: 0.3 }}
             className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
-            {/* Logo top-left — neon star */}
-          <Link to="/" className="group flex items-center gap-3">
-  <div className="relative h-10 w-10">
-    <img
-      src="/nazros-logo.png"
-      alt="Сурикен nazrOS"
-      className="h-full w-full object-contain drop-shadow-[0_0_20px_var(--neon)]/30 transition-all group-hover:drop-shadow-[0_0_40px_var(--neon)]/60"
-    />
-  </div>
-  <div className="hidden sm:block">
-    <div className="font-mono text-[9px] tracking-[0.35em] text-foreground/50">NAZROS // OS</div>
-    <div className="font-display text-base font-bold leading-none tracking-tight">
-      киберэдэ<span className="text-neon">Н</span>
-    </div>
-  </div>
-</Link>
+            {/* Логотип — анимированный сурикен */}
+            <Link to="/" className="group flex items-center gap-3">
+              <div className="relative h-10 w-10 flex items-center justify-center">
+                <svg
+                  viewBox="0 0 100 100"
+                  className="h-10 w-10 animate-spin-slow drop-shadow-[0_0_20px_rgba(255,0,0,0.6)]"
+                  style={{ animationDuration: '8s' }}
+                >
+                  <defs>
+                    <linearGradient id="cyberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#ff0040" />
+                      <stop offset="50%" stopColor="#ff4d4d" />
+                      <stop offset="100%" stopColor="#ff0040" />
+                    </linearGradient>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                      <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <path
+                    d="M50 10 L60 35 L85 45 L65 60 L70 85 L50 70 L30 85 L35 60 L15 45 L40 35 Z"
+                    fill="url(#cyberGrad)"
+                    filter="url(#glow)"
+                    stroke="#ff0040"
+                    strokeWidth="2"
+                  />
+                  <text
+                    x="50"
+                    y="55"
+                    textAnchor="middle"
+                    fontSize="12"
+                    fontWeight="bold"
+                    fill="white"
+                    fontFamily="monospace"
+                    className="select-none"
+                  >
+                    nazrOS
+                  </text>
+                </svg>
+              </div>
+              <div className="hidden sm:block">
+                <div className="font-mono text-[9px] tracking-[0.35em] text-foreground/50">NAZROS // OS</div>
+                <div className="font-display text-base font-bold leading-none tracking-tight">
+                  киберэдэ<span className="text-neon">Н</span>
+                </div>
+              </div>
+            </Link>
 
-            {/* Center nav */}
+            {/* Центральное меню */}
             <nav className="pointer-events-auto hidden items-center gap-1 rounded-full border border-border bg-background/30 px-2 py-1.5 backdrop-blur-xl md:flex">
               {items.map((it) => (
                 <Link
@@ -61,7 +95,7 @@ export function TopNav() {
               ))}
             </nav>
 
-            {/* Avatar top-right */}
+            {/* Аватарка в правом углу */}
             <Link to="/profile" className="group relative flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60">
               <div className="hidden text-right md:block">
                 <div className="font-mono text-[9px] tracking-widest text-foreground/50">USER</div>
