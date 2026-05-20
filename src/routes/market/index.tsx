@@ -3,6 +3,110 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 
+// Данные продуктов
+const products = [
+  {
+    id: 1,
+    name: "CyberDeck Pro X1",
+    description: "Ноутбук с открытым железом и нейросетевым ускорителем",
+    price: 89900,
+    category: "УСТРОЙСТВА",
+    type: "DEVICE",
+    image: "/market/clon.png",
+    inStock: true,
+  },
+  {
+    id: 2,
+    name: "NullPhone v2",
+    description: "Смартфон с GraphQL OS и шифрованным каналом",
+    price: 34900,
+    category: "УСТРОЙСТВА",
+    type: "DEVICE",
+    image: "/market/grothN.png",
+    inStock: true,
+  },
+  {
+    id: 3,
+    name: "PITerminal Kit",
+    description: "Портативный хакинг-компьютер на базе RPi5",
+    price: 12900,
+    category: "УСТРОЙСТВА",
+    type: "DEVICE",
+    image: "/market/biohN.png",
+    inStock: true,
+  },
+  {
+    id: 4,
+    name: "nazrOS Core",
+    description: "Основной дистрибутив экосистемы nazrOS",
+    price: 0,
+    category: "OS BUILDER",
+    type: "OS",
+    image: "/market/pin.png",
+    inStock: true,
+  },
+  {
+    id: 5,
+    name: "nazrOS Sleath",
+    description: "Privacy-first дистрибутив с hardened ядром",
+    price: 0,
+    category: "OS BUILDER",
+    type: "OS",
+    image: "/market/pin.png",
+    inStock: true,
+  },
+  {
+    id: 6,
+    name: "nazrOS Dev Edition",
+    description: "Версия для разработчиков с предустановленными инструментами",
+    price: 0,
+    category: "OS BUILDER",
+    type: "OS",
+    image: "/market/pin.png",
+    inStock: true,
+  },
+  {
+    id: 7,
+    name: "CipherScan Pro",
+    description: "Десктоп-утилита для пентеста и анализа кода",
+    price: 4900,
+    category: "СОФТ",
+    type: "SOFTWARE",
+    image: "/market/blaN.png",
+    inStock: true,
+  },
+  {
+    id: 8,
+    name: "PixelForge Studio",
+    description: "Редактор для создания пиксельной графики",
+    price: 2900,
+    category: "СОФТ",
+    type: "SOFTWARE",
+    image: "/market/blaN.png",
+    inStock: true,
+  },
+  {
+    id: 9,
+    name: "DataVault",
+    description: "Персональный менеджер паролей",
+    price: 1900,
+    category: "СОФТ",
+    type: "SOFTWARE",
+    image: "/market/blaN.png",
+    inStock: true,
+  },
+  {
+    id: 10,
+    name: "NetWatch Dashboard",
+    description: "Панель управления сетью",
+    price: 3500,
+    category: "СОФТ",
+    type: "SOFTWARE",
+    image: "/market/blaN.png",
+    inStock: true,
+  },
+];
+
 export const Route = createFileRoute("/market")({
   component: () => {
     const [selectedCategory, setSelectedCategory] = useState("ВСЕ ИНВЕНТАРЬ");
@@ -13,17 +117,11 @@ export const Route = createFileRoute("/market")({
 
     return (
       <PageShell
-        tag="МАРКЕТПЛЕЙС"
+        tag="МАРКЕТПЛЕЙС // ЦИФРОВЫЕ ПРОДУКТЫ"
         title={<><span className="text-neon">МАР</span>КЕТ</>}
-        subtitle="ЦИФРОВЫЕ ПРОДУКТЫ И УСТРОЙСТВА"
+        subtitle="ЭКОСИСТЕМА NAZROS — ПОДДЕРЖИВАЙ РАЗРАБОТЧИКОВ"
       >
-        {/* Фильтр — появляется сразу */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-wrap gap-4 mb-8 justify-center"
-        >
+        <div className="flex flex-wrap gap-4 mb-8 justify-center">
           {["ВСЕ ИНВЕНТАРЬ", "УСТРОЙСТВА", "СОФТ", "OS BUILDER"].map((cat) => (
             <button
               key={cat}
@@ -37,24 +135,15 @@ export const Route = createFileRoute("/market")({
               {cat}
             </button>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Сетка товаров — появляется при скролле */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {filteredProducts.map((product) => (
             <motion.div
               key={product.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * product.id, duration: 0.5 }}
+              whileHover={{ scale: 1.01 }}
               className="group flex flex-col bg-[#0d0d0d] border border-gray-800 rounded overflow-hidden hover:border-[var(--neon)]/50 transition-all"
             >
-              {/* Картинка товара */}
               <div className="h-48 bg-gray-900 relative flex items-center justify-center">
                 <img
                   src={product.image || "https://via.placeholder.com/200x200?text=+"}
@@ -80,7 +169,7 @@ export const Route = createFileRoute("/market")({
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </PageShell>
     );
   },
