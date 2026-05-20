@@ -125,3 +125,13 @@
 .animate-pulse-neon { animation: pulse-neon 2.4s ease-in-out infinite; }
 .animate-flicker { animation: flicker 3s ease-in-out infinite; }
 .animate-float-y { animation: float-y 4s ease-in-out infinite; }
+
+/* Анимация для сурикена */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
