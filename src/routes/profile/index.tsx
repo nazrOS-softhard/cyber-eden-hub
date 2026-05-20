@@ -11,7 +11,7 @@ export const Route = createFileRoute("/profile")({
       <PageShell
         tag="ЛИЧНЫЙ КАБИНЕТ"
         title={<><span className="text-neon">КИБЛА</span> КИБЕРА</>}
-        subtitle="КИБЛА · ПРОГРЕСС · ИНВЕНТАРЬ"
+       
       >
         {/* Фильтры-вкладки */}
         <div className="flex flex-wrap gap-4 mb-8 justify-center">
