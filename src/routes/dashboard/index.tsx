@@ -1,66 +1,113 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { PageShell } from "@/components/PageShell";
 
-export const Route = createFileRoute("/dashboard")({
-  component: () => (
-    <PageShell
-      tag="nazrOS · dashboard · live"
-      title={<><span className="text-cyan">даш</span>борд</>}
-      subtitle="кибер-кабинет · XP · миссии · активность"
-    >
-      {/* Верхняя часть — появляется сразу */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="grid w-[min(880px,90vw)] grid-cols-2 gap-3 md:grid-cols-4"
-      >
-        {[
-          { l: "XP", v: "18,420", c: "text-neon" },
-          { l: "RANK", v: "S-07", c: "text-cyan" },
-          { l: "MISSIONS", v: "12 / 30", c: "text-acid" },
-          { l: "STREAK", v: "47д", c: "text-neon" },
-        ].map((s) => (
-          <div key={s.l} className="rounded-lg border border-border bg-background/40 px-4 py-3 backdrop-blur-md">
-            <div className="font-mono text-[9px] tracking-widest text-foreground/50">{s.l}</div>
-            <div className={`mt-1 font-display text-xl font-bold ${s.c}`}>{s.v}</div>
-          </div>
-        ))}
-      </motion.div>
+// Данные киберов
+const cybers = [
+  { id: 1, name: "CyberUser_01", role: "Наблюдатель", xp: 1240, status: "online" },
+  { id: 2, name: "CyberUser_02", role: "Наблюдатель", xp: 980, status: "offline" },
+  { id: 3, name: "CyberUser_03", role: "Оператор", xp: 3450, status: "online" },
+  { id: 4, name: "CyberUser_04", role: "Оператор", xp: 2780, status: "online" },
+  { id: 5, name: "CyberUser_05", role: "Архитектор ядра", xp: 8920, status: "online" },
+  { id: 6, name: "CyberUser_06", role: "Архитектор ядра", xp: 7540, status: "offline" },
+  { id: 7, name: "CyberUser_07", role: "Главный разработчик", xp: 12450, status: "online" },
+  { id: 8, name: "CyberUser_08", role: "Главный разработчик", xp: 10320, status: "online" },
+];
 
-      {/* Нижняя часть — появляется при скролле */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.8 }}
-        className="mt-8 w-[min(880px,90vw)]"
+export const Route = createFileRoute("/dashboard")({
+  component: () => {
+    const [selectedRole, setSelectedRole] = useState("Все");
+
+    const filteredCybers = selectedRole === "Все"
+      ? cybers
+      : cybers.filter((c) => c.role === selectedRole);
+
+    return (
+      <PageShell
+        tag="nazrOS · dashboard · live"
+        title={<><span className="text-cyan">даш</span>борд</>}
+        subtitle="кибер-кабинет · XP · миссии · активность"
       >
-        <h2 className="text-lg font-bold font-display text-foreground/80 mb-4">
-          СТАТИСТИКА АКТИВНОСТИ
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {/* Верхняя часть — статистика */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="grid w-[min(880px,90vw)] grid-cols-2 gap-3 md:grid-cols-4"
+        >
           {[
-            { label: "Прочитано статей", value: "47", color: "text-cyan" },
-            { label: "Просмотрено интервью", value: "12", color: "text-neon" },
-            { label: "Выполнено миссий", value: "8", color: "text-acid" },
-            { label: "Загружено 3D моделей", value: "3", color: "text-cyan" },
-            { label: "Часов в эфире", value: "14h", color: "text-neon" },
-            { label: "Заработано XP", value: "4,200", color: "text-acid" },
-          ].map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 + i * 0.1, duration: 0.5 }}
-              className="bg-[#0d0d0d] border border-gray-800 rounded-lg p-4 text-center"
-            >
-              <div className="font-mono text-[9px] tracking-widest text-gray-500">{stat.label}</div>
-              <div className={`mt-1 font-display text-2xl font-bold ${stat.color}`}>{stat.value}</div>
-            </motion.div>
+            { l: "XP", v: "18,420", c: "text-neon" },
+            { l: "RANK", v: "S-07", c: "text-cyan" },
+            { l: "MISSIONS", v: "12 / 30", c: "text-acid" },
+            { l: "STREAK", v: "47д", c: "text-neon" },
+          ].map((s) => (
+            <div key={s.l} className="rounded-lg border border-border bg-background/40 px-4 py-3 backdrop-blur-md">
+              <div className="font-mono text-[9px] tracking-widest text-foreground/50">{s.l}</div>
+              <div className={`mt-1 font-display text-xl font-bold ${s.c}`}>{s.v}</div>
+            </div>
           ))}
-        </div>
-      </motion.div>
-    </PageShell>
-  ),
+        </motion.div>
+
+        {/* Таблица киберов */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="w-[min(880px,90vw)] mt-12"
+        >
+          <h2 className="text-lg font-bold font-display text-foreground/80 mb-4">
+            СПИСОК КИБЕРОВ
+          </h2>
+
+          {/* Фильтры */}
+          <div className="flex flex-wrap gap-3 mb-6">
+            {["Все", "Наблюдатель", "Оператор", "Архитектор ядра", "Главный разработчик"].map((role) => (
+              <button
+                key={role}
+                onClick={() => setSelectedRole(role)}
+                className={`px-4 py-1.5 rounded-full text-xs tracking-wider transition ${
+                  selectedRole === role
+                    ? "bg-[var(--neon)]/20 border border-[var(--neon)] text-[var(--neon)]"
+                    : "bg-transparent border border-gray-700 text-gray-400 hover:border-gray-500"
+                }`}
+              >
+                {role}
+              </button>
+            ))}
+          </div>
+
+          {/* Таблица */}
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="border-b border-gray-800">
+                  <th className="text-left py-3 px-4 text-xs uppercase tracking-wider text-gray-500">Кибер</th>
+                  <th className="text-left py-3 px-4 text-xs uppercase tracking-wider text-gray-500">Роль</th>
+                  <th className="text-left py-3 px-4 text-xs uppercase tracking-wider text-gray-500">XP</th>
+                  <th className="text-left py-3 px-4 text-xs uppercase tracking-wider text-gray-500">Статус</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredCybers.map((cyber) => (
+                  <tr key={cyber.id} className="border-b border-gray-800 hover:bg-gray-900/40 transition">
+                    <td className="py-3 px-4 text-sm font-display">{cyber.name}</td>
+                    <td className="py-3 px-4 text-sm text-cyan">{cyber.role}</td>
+                    <td className="py-3 px-4 text-sm text-neon">{cyber.xp}</td>
+                    <td className="py-3 px-4 text-sm">
+                      <span className={`px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider ${
+                        cyber.status === "online" ? "bg-green-500/20 text-green-400" : "bg-gray-500/20 text-gray-400"
+                      }`}>
+                        {cyber.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </motion.div>
+      </PageShell>
+    );
+  },
 });
