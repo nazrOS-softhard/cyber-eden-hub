@@ -1,11 +1,10 @@
-
 import { motion } from "framer-motion";
 import { useState } from "react";
 
 // Категории товаров
 const categories = ["Все", "Устройства", "OS", "Софт", "Аксессуары"];
 
-// Данные продуктов
+// Данные продуктов (с точными названиями файлов из public/market/)
 const products = [
   {
     id: 1,
@@ -14,7 +13,7 @@ const products = [
     price: 89900,
     category: "Устройства",
     type: "device",
-    image: "/market/cyberdeck.jpg",
+    image: "/market/clon.png",
     inStock: true,
   },
   {
@@ -24,7 +23,7 @@ const products = [
     price: 34900,
     category: "Устройства",
     type: "device",
-    image: "/market/nullphone.jpg",
+    image: "/market/grothN.png",
     inStock: true,
   },
   {
@@ -34,7 +33,7 @@ const products = [
     price: 0,
     category: "OS",
     type: "os",
-    image: "/market/core.png",
+    image: "/market/pin.png",
     inStock: true,
   },
   {
@@ -44,7 +43,7 @@ const products = [
     price: 12900,
     category: "Устройства",
     type: "device",
-    image: "/market/pi-kit.jpg",
+    image: "/market/biohN.png",
     inStock: true,
   },
   {
@@ -54,7 +53,7 @@ const products = [
     price: 5900,
     category: "Софт",
     type: "software",
-    image: "/market/shadow-bundle.jpg",
+    image: "/market/blaN.png",
     inStock: false,
   },
   {
@@ -64,7 +63,7 @@ const products = [
     price: 3200,
     category: "Аксессуары",
     type: "accessory",
-    image: "/market/neon-keys.jpg",
+    image: "/market/clon_full.png",
     inStock: true,
   },
 ];
