@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as StreamsRouteImport } from './routes/streams'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const StreamsRoute = StreamsRouteImport.update({
   id: '/streams',
   path: '/streams',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JournalRoute = JournalRouteImport.update({
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/journal': typeof JournalRoute
+  '/profile': typeof ProfileRoute
   '/streams': typeof StreamsRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/journal': typeof JournalRoute
+  '/profile': typeof ProfileRoute
   '/streams': typeof StreamsRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,28 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/events': typeof EventsRoute
   '/journal': typeof JournalRoute
+  '/profile': typeof ProfileRoute
   '/streams': typeof StreamsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/events' | '/journal' | '/streams'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/events'
+    | '/journal'
+    | '/profile'
+    | '/streams'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/events' | '/journal' | '/streams'
-  id: '__root__' | '/' | '/dashboard' | '/events' | '/journal' | '/streams'
+  to: '/' | '/dashboard' | '/events' | '/journal' | '/profile' | '/streams'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/events'
+    | '/journal'
+    | '/profile'
+    | '/streams'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +98,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   EventsRoute: typeof EventsRoute
   JournalRoute: typeof JournalRoute
+  ProfileRoute: typeof ProfileRoute
   StreamsRoute: typeof StreamsRoute
 }
 
@@ -86,6 +109,13 @@ declare module '@tanstack/react-router' {
       path: '/streams'
       fullPath: '/streams'
       preLoaderRoute: typeof StreamsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/journal': {
@@ -124,6 +154,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   EventsRoute: EventsRoute,
   JournalRoute: JournalRoute,
+  ProfileRoute: ProfileRoute,
   StreamsRoute: StreamsRoute,
 }
 export const routeTree = rootRouteImport
