@@ -3,11 +3,11 @@ import { Link } from "@tanstack/react-router";
 
 const items = [
   { label: "Главная", to: "/" },
-  { label: "Дашборд", to: "/" },
-  { label: "Журнал", to: "/" },
-  { label: "Трансляции", to: "/" },
-  { label: "События", to: "/" },
-];
+  { label: "Дашборд", to: "/dashboard" },
+  { label: "Журнал", to: "/journal" },
+  { label: "Трансляции", to: "/streams" },
+  { label: "События", to: "/events" },
+] as const;
 
 export function TopNav() {
   return (
@@ -48,7 +48,7 @@ export function TopNav() {
       </nav>
 
       {/* Avatar top-right */}
-      <button className="group relative flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60">
+      <Link to="/profile" className="group relative flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60">
         <div className="hidden text-right md:block">
           <div className="font-mono text-[9px] tracking-widest text-foreground/50">USER</div>
           <div className="text-xs text-cyan">0xnazr</div>
@@ -59,7 +59,7 @@ export function TopNav() {
             N
           </div>
         </div>
-      </button>
+      </Link>
     </motion.header>
   );
 }
