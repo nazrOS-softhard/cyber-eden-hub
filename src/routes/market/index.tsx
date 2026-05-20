@@ -3,7 +3,6 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 
-// Данные продуктов
 const products = [
   {
     id: 1,
@@ -121,7 +120,6 @@ export const Route = createFileRoute("/market")({
         title={<><span className="text-neon">МАР</span>КЕТ</>}
         subtitle="ЭКОСИСТЕМА NAZROS — ПОДДЕРЖИВАЙ РАЗРАБОТЧИКОВ"
       >
-        {/* Фильтры — сдвинуты ниже и активны */}
         <div className="flex flex-wrap gap-4 mb-12 justify-center mt-24">
           {["ВСЕ ИНВЕНТАРЬ", "УСТРОЙСТВА", "СОФТ", "OS BUILDER"].map((cat) => (
             <button
@@ -138,7 +136,6 @@ export const Route = createFileRoute("/market")({
           ))}
         </div>
 
-        {/* Сетка товаров */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {filteredProducts.map((product) => (
             <motion.div
@@ -146,11 +143,11 @@ export const Route = createFileRoute("/market")({
               whileHover={{ scale: 1.01 }}
               className="group flex flex-col bg-[#0d0d0d] border border-gray-800 rounded overflow-hidden hover:border-[var(--neon)]/50 transition-all"
             >
-              <div className="h-48 bg-gray-900 relative flex items-center justify-center">
+              <div className="h-48 bg-gray-900 relative flex items-center justify-center overflow-hidden">
                 <img
                   src={product.image || "https://via.placeholder.com/200x200?text=+"}
                   alt={product.name}
-                  className="w-24 h-24 object-contain opacity-70 group-hover:opacity-100 transition"
+                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition"
                 />
                 <div className="absolute top-3 left-3 bg-black/60 px-2 py-0.5 rounded text-[10px] uppercase tracking-wider text-gray-400 border border-white/10">
                   {product.type}
