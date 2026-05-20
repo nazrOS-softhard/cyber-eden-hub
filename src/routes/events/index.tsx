@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 
+// Данные событий (по вашему скриншоту)
 const events = [
   {
     id: 1,
@@ -88,10 +89,10 @@ export const Route = createFileRoute("/events")({
 
     return (
       <PageShell
-        tag="EVENTS • CALENDAR SYNC"
+        tag="БАЗА ЗНАНИЙ СИНДИКАТА"
         title={<><span className="text-acid">СОБЫ</span>ТИЯ</>}
       >
-        <div className="mt-16"> {/* ← увеличили отступ */}
+        <div className="mt-12"> {/* отступ сверху */}
           <div className="flex flex-wrap gap-3 mb-8 justify-center">
             {["Все", "Кибербезопасность", "Геймдев", "Киберспорт", "Хакинг", "Цифровая этика"].map((topic) => (
               <button
