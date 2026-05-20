@@ -29,7 +29,7 @@ export function TopNav() {
             transition={{ duration: 0.3 }}
             className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
-            {/* Логотип — анимированный сурикен */}
+            {/* Логотип — точная копия сурикена с фото */}
             <Link to="/" className="group flex items-center gap-3">
               <div className="relative h-10 w-10 flex items-center justify-center">
                 <svg
@@ -39,9 +39,9 @@ export function TopNav() {
                 >
                   <defs>
                     <linearGradient id="neonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#ff0066" />
-                      <stop offset="50%" stopColor="#ff3366" />
-                      <stop offset="100%" stopColor="#ff0066" />
+                      <stop offset="0%" stopColor="#ff0040" />
+                      <stop offset="50%" stopColor="#ff4d4d" />
+                      <stop offset="100%" stopColor="#ff0040" />
                     </linearGradient>
                     <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                       <stop offset="0%" stopColor="#00ffff" />
@@ -49,56 +49,25 @@ export function TopNav() {
                       <stop offset="100%" stopColor="#00ffff" />
                     </linearGradient>
                     <filter id="glow">
-                      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
                       <feMerge>
                         <feMergeNode in="coloredBlur"/>
                         <feMergeNode in="SourceGraphic"/>
                       </feMerge>
                     </filter>
                   </defs>
-                  {/* Внешний круг */}
-                  <circle cx="100" cy="100" r="85" fill="none" stroke="#ff0040" strokeWidth="2" strokeDasharray="10 5" opacity="0.4" />
-                  
-                  {/* Первый лепесток (верхний) */}
+                  {/* Только внутренняя форма — четыре острых лезвия */}
                   <path
-                    d="M100 10 Q140 50 130 90 Q120 70 100 60 Q80 70 70 90 Q60 50 100 10Z"
+                    d="M100 10 C110 50 130 70 150 80 C130 90 110 100 100 130 C90 100 70 90 50 80 C70 70 90 50 100 10 Z"
                     fill="none"
                     stroke="url(#neonGrad)"
-                    strokeWidth="3"
+                    strokeWidth="4"
                     filter="url(#glow)"
                   />
-                  
-                  {/* Второй лепесток (правый) */}
-                  <path
-                    d="M190 100 Q150 140 110 130 Q130 120 140 100 Q130 80 110 70 Q150 60 190 100Z"
-                    fill="none"
-                    stroke="url(#neonGrad)"
-                    strokeWidth="3"
-                    filter="url(#glow)"
-                  />
-                  
-                  {/* Третий лепесток (нижний) */}
-                  <path
-                    d="M100 190 Q60 150 70 110 Q80 130 100 140 Q120 130 130 110 Q140 150 100 190Z"
-                    fill="none"
-                    stroke="url(#neonGrad)"
-                    strokeWidth="3"
-                    filter="url(#glow)"
-                  />
-                  
-                  {/* Четвёртый лепесток (левый) */}
-                  <path
-                    d="M10 100 Q50 60 90 70 Q70 80 60 100 Q70 120 90 130 Q50 140 10 100Z"
-                    fill="none"
-                    stroke="url(#neonGrad)"
-                    strokeWidth="3"
-                    filter="url(#glow)"
-                  />
-                  
                   {/* Текст в центре */}
                   <text
                     x="100"
-                    y="105"
+                    y="110"
                     textAnchor="middle"
                     fontSize="14"
                     fontWeight="bold"
@@ -108,9 +77,8 @@ export function TopNav() {
                   >
                     nazrOS
                   </text>
-                  
                   {/* Центральная точка (свечение) */}
-                  <circle cx="100" cy="100" r="3" fill="#ffffff" filter="url(#glow)" />
+                  <circle cx="100" cy="100" r="4" fill="#ffffff" filter="url(#glow)" />
                 </svg>
               </div>
               <div className="hidden sm:block">
