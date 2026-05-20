@@ -7,6 +7,7 @@ const items = [
   { label: "Журнал", to: "/journal" },
   { label: "Трансляции", to: "/streams" },
   { label: "События", to: "/events" },
+  { label: "Маркет", to: "/market" },
 ] as const;
 
 export function TopNav() {
