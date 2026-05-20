@@ -121,7 +121,8 @@ export const Route = createFileRoute("/market")({
         title={<><span className="text-neon">МАР</span>КЕТ</>}
         subtitle="ЭКОСИСТЕМА NAZROS — ПОДДЕРЖИВАЙ РАЗРАБОТЧИКОВ"
       >
-        <div className="flex flex-wrap gap-4 mb-8 justify-center">
+        {/* Фильтры — сдвинуты ниже и активны */}
+        <div className="flex flex-wrap gap-4 mb-12 justify-center mt-8">
           {["ВСЕ ИНВЕНТАРЬ", "УСТРОЙСТВА", "СОФТ", "OS BUILDER"].map((cat) => (
             <button
               key={cat}
@@ -137,6 +138,7 @@ export const Route = createFileRoute("/market")({
           ))}
         </div>
 
+        {/* Сетка товаров */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {filteredProducts.map((product) => (
             <motion.div
