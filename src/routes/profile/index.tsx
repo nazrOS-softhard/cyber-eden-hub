@@ -46,7 +46,7 @@ export const Route = createFileRoute("/profile")({
                     СМЕНИТЬ АВАТАР
                   </button>
                   <h2 className="mt-4 text-xl font-bold font-display">CyberUser_08</h2>
-                  <p className="text-sm text-cyan">Architect</p>
+                  <p className="text-sm text-cyan">Operator</p>
                   <div className="mt-4 w-full bg-gray-800 h-2 rounded-full overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-purple-500 to-cyan-400" style={{ width: "65%" }}></div>
                   </div>
