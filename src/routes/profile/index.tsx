@@ -9,7 +9,7 @@ export const Route = createFileRoute("/profile")({
       title={<><span className="text-neon">КИБЛА</span> КИБЕРА</>}
       subtitle="ДОСЬЕ ОПЕРАТИВНИКА · ПРОГРЕСС · ИНВЕНТАРЬ"
     >
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 text-left">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 text-left mt-8">
         
         {/* ЛЕВАЯ КОЛОНКА */}
         <div className="lg:col-span-1 space-y-6">
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/profile")({
             </div>
           </div>
 
-          {/* Подключённые аккаунты */}
+          {/* Подключённые аккаунты с ползунками */}
           <div className="bg-[#0d0d0d] border border-gray-800 rounded-lg p-6">
             <h3 className="text-xs uppercase tracking-widest text-gray-500 mb-4">ПОДКЛЮЧЁННЫЕ АККАУНТЫ</h3>
             <div className="space-y-3">
@@ -42,14 +42,24 @@ export const Route = createFileRoute("/profile")({
                   <span className="text-blue-400">✈️</span>
                   <span className="text-sm">Telegram</span>
                 </div>
-                <span className="text-xs text-gray-500">Подключён</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-12 h-6 bg-gray-700 rounded-full relative cursor-pointer">
+                    <div className="absolute left-1 top-1 w-4 h-4 rounded-full bg-green-400 transition-all"></div>
+                  </div>
+                  <span className="text-xs text-gray-400">Авторизован</span>
+                </div>
               </div>
               <div className="flex items-center justify-between bg-black/40 p-3 rounded border border-gray-700">
                 <div className="flex items-center gap-3">
                   <span className="text-blue-400">VK</span>
                   <span className="text-sm">ВКонтакте</span>
                 </div>
-                <span className="text-xs text-gray-500">Подключён</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-12 h-6 bg-gray-700 rounded-full relative cursor-pointer">
+                    <div className="absolute left-1 top-1 w-4 h-4 rounded-full bg-green-400 transition-all"></div>
+                  </div>
+                  <span className="text-xs text-gray-400">Авторизован</span>
+                </div>
               </div>
             </div>
           </div>
@@ -137,7 +147,7 @@ export const Route = createFileRoute("/profile")({
             </div>
           </div>
 
-          {/* Инвентарь */}
+          {/* Инвентарь с XP */}
           <div className="bg-[#0d0d0d] border border-gray-800 rounded-lg p-6">
             <h3 className="text-xs uppercase tracking-widest text-gray-500 mb-4">ЦИФРОВОЙ ИНВЕНТАРЬ</h3>
             <div className="space-y-3">
@@ -147,6 +157,7 @@ export const Route = createFileRoute("/profile")({
                   <span className="text-sm">RedTeam_Tools.zip</span>
                 </div>
                 <span className="text-xs text-gray-500">4.2 MB</span>
+                <span className="text-xs text-green-400">+120 XP</span>
               </div>
               <div className="flex items-center justify-between bg-black/40 p-3 rounded border border-gray-700">
                 <div className="flex items-center gap-3">
@@ -154,6 +165,7 @@ export const Route = createFileRoute("/profile")({
                   <span className="text-sm">CyberSec_Report_v1.pdf</span>
                 </div>
                 <span className="text-xs text-gray-500">2.1 MB</span>
+                <span className="text-xs text-green-400">+80 XP</span>
               </div>
               <div className="flex items-center justify-between bg-black/40 p-3 rounded border border-gray-700">
                 <div className="flex items-center gap-3">
@@ -161,6 +173,7 @@ export const Route = createFileRoute("/profile")({
                   <span className="text-sm">nazrOS_wallpaper.png</span>
                 </div>
                 <span className="text-xs text-gray-500">5.8 MB</span>
+                <span className="text-xs text-green-400">+50 XP</span>
               </div>
             </div>
           </div>
