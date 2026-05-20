@@ -3,11 +3,11 @@ import { Link } from "@tanstack/react-router";
 
 const items = [
   { label: "Главная", to: "/" },
-  { label: "Дашборд", to: "/" },
-  { label: "Журнал", to: "/" },
-  { label: "Трансляции", to: "/" },
-  { label: "События", to: "/" },
-];
+  { label: "Дашборд", to: "/dashboard" },
+  { label: "Журнал", to: "/journal" },
+  { label: "Трансляции", to: "/streams" },
+  { label: "События", to: "/events" },
+] as const;
 
 export function TopNav() {
   return (
