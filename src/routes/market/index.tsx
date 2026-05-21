@@ -93,7 +93,7 @@ export const Route = createFileRoute("/market")({
       >
         <div className="h-screen flex flex-col overflow-hidden">
           {/* Фильтры */}
-          <div className="flex-none mb-4">
+          <div className="flex-none mb-8">
             <div className="flex flex-wrap gap-2 justify-center">
               {["ВСЕ ИНВЕНТАРЬ", "УСТРОЙСТВА", "СОФТ", "OS BUILDER"].map((cat) => (
                 <button
@@ -153,13 +153,13 @@ export const Route = createFileRoute("/market")({
         {/* Модальное окно с полным описанием */}
         {selectedProduct && (
           <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" onClick={() => setSelectedProduct(null)}>
-            <div className="bg-[#0d0d0d] border border-[var(--neon)]/50 rounded-lg w-full h-[90vh] flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-[#0d0d0d] border border-[var(--neon)]/50 rounded-lg w-full min-h-screen flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
               {/* Стрелка для закрытия */}
               <div
                 className="absolute left-4 top-1/2 -translate-y-1/2 z-50 cursor-pointer"
                 onClick={() => setSelectedProduct(null)}
               >
-                <img src="/arrow.svg" alt="Закрыть" className="h-8 w-8 object-contain opacity-60 hover:opacity-100 transition" />
+                <img src="/arrow.svg" alt="Закрыть" className="h-8 w-8 object-contain rotate-90 opacity-60 hover:opacity-100 transition" />
               </div>
 
               {/* Фото на весь экран */}
