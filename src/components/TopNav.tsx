@@ -22,7 +22,7 @@ export function TopNav() {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      {/* Логотип — текст внутри сурикена */}
+      {/* Логотип — сурикен с текстом внутри */}
       <Link to="/" className="absolute left-0 top-0 z-40 p-4">
         <div className="relative w-12 h-12">
           <motion.img
@@ -34,7 +34,10 @@ export function TopNav() {
             style={{ filter: `drop-shadow(0 0 20px ${shurikenColor})` }}
           />
           <div className="absolute inset-0 flex items-center justify-center cursor-pointer">
-            <span className="font-bold text-[8px] text-cyan">КиберэдэН</span>
+            <div className="flex items-center gap-0.5">
+              <span className="font-bold text-[6px] text-cyan">Кибер</span>
+              <span className="font-bold text-[6px] text-white">эдэН</span>
+            </div>
           </div>
         </div>
       </Link>
