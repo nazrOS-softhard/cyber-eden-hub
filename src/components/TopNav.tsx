@@ -80,36 +80,47 @@ export function TopNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -60 }}
             transition={{ duration: 0.3 }}
-            className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
+            className="absolute inset-x-0 top-0 flex items-center justify-center px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
-            {/* Левая группа (слева от стрелки) */}
             <nav className="pointer-events-auto flex items-center gap-1 rounded-full border border-border bg-background/30 px-2 py-1.5 backdrop-blur-xl">
-              {leftItems.map((it) => (
-                <Link
-                  key={it.label}
-                  to={it.to}
-                  className="relative rounded-full px-4 py-1.5 text-xs uppercase tracking-wider text-foreground/70 transition-colors hover:text-foreground"
-                  activeProps={{ className: "text-foreground bg-[var(--neon)]/15 shadow-[0_0_18px_var(--neon)]/30" }}
-                  activeOptions={{ exact: true }}
-                >
-                  {it.label}
-                </Link>
-              ))}
-            </nav>
+              {/* Левая группа */}
+              <span className="flex items-center gap-1">
+                {leftItems.map((it) => (
+                  <Link
+                    key={it.label}
+                    to={it.to}
+                    className="relative rounded-full px-4 py-1.5 text-xs uppercase tracking-wider text-foreground/70 transition-colors hover:text-foreground"
+                    activeProps={{ className: "text-foreground bg-[var(--neon)]/15 shadow-[0_0_18px_var(--neon)]/30" }}
+                    activeOptions={{ exact: true }}
+                  >
+                    {it.label}
+                  </Link>
+                ))}
+              </span>
 
-            {/* Правая группа (справа от стрелки) */}
-            <nav className="pointer-events-auto flex items-center gap-1 rounded-full border border-border bg-background/30 px-2 py-1.5 backdrop-blur-xl">
-              {rightItems.map((it) => (
-                <Link
-                  key={it.label}
-                  to={it.to}
-                  className="relative rounded-full px-4 py-1.5 text-xs uppercase tracking-wider text-foreground/70 transition-colors hover:text-foreground"
-                  activeProps={{ className: "text-foreground bg-[var(--neon)]/15 shadow-[0_0_18px_var(--neon)]/30" }}
-                  activeOptions={{ exact: true }}
-                >
-                  {it.label}
-                </Link>
-              ))}
+              {/* Разделитель (стрелка) — исчезает при закрытии */}
+              <motion.span
+                className="flex items-center justify-center"
+                exit={{ opacity: 0, scale: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <img src="/arrow.svg" alt="|" className="h-4 w-4 opacity-30" />
+              </motion.span>
+
+              {/* Правая группа */}
+              <span className="flex items-center gap-1">
+                {rightItems.map((it) => (
+                  <Link
+                    key={it.label}
+                    to={it.to}
+                    className="relative rounded-full px-4 py-1.5 text-xs uppercase tracking-wider text-foreground/70 transition-colors hover:text-foreground"
+                    activeProps={{ className: "text-foreground bg-[var(--neon)]/15 shadow-[0_0_18px_var(--neon)]/30" }}
+                    activeOptions={{ exact: true }}
+                  >
+                    {it.label}
+                  </Link>
+                ))}
+              </span>
             </nav>
           </motion.header>
         )}
