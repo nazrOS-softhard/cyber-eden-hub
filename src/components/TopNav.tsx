@@ -11,8 +11,8 @@ const allItems = [
   { label: "МАРКЕТ", to: "/market" },
 ] as const;
 
-const leftItems = allItems.slice(0, 3); // ГЛАВНАЯ, ДАШБОРД, ЖУРНАЛ
-const rightItems = allItems.slice(3);   // ТРАНСЛЯЦИИ, СОБЫТИЯ, МАРКЕТ
+const leftItems = allItems.slice(0, 3);
+const rightItems = allItems.slice(3);
 
 export function TopNav() {
   const [isHovering, setIsHovering] = useState(false);
@@ -35,7 +35,7 @@ export function TopNav() {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {/* Стрелка — выдвигается при наведении */}
+      {/* Стрелка — появляется при наведении */}
       <motion.div
         className="absolute top-0 left-1/2 -translate-x-1/2 z-40"
         initial={{ y: -30, opacity: 0 }}
@@ -70,7 +70,7 @@ export function TopNav() {
         </div>
       </Link>
 
-      {/* Меню */}
+      {/* Меню — выезжает при клике */}
       <AnimatePresence>
         {isOpen && (
           <motion.header
@@ -79,9 +79,9 @@ export function TopNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -60 }}
             transition={{ duration: 0.3 }}
-            className="absolute inset-x-0 top-0 flex items-center justify-center px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
+            className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
-            {/* Левая группа */}
+            {/* Левая группа (слева от стрелки) */}
             <nav className="pointer-events-auto flex items-center gap-1 rounded-full border border-border bg-background/30 px-2 py-1.5 backdrop-blur-xl">
               {leftItems.map((it) => (
                 <Link
@@ -96,7 +96,7 @@ export function TopNav() {
               ))}
             </nav>
 
-            {/* Правая группа */}
+            {/* Правая группа (справа от стрелки) */}
             <nav className="pointer-events-auto flex items-center gap-1 rounded-full border border-border bg-background/30 px-2 py-1.5 backdrop-blur-xl">
               {rightItems.map((it) => (
                 <Link
