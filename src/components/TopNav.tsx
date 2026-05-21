@@ -56,8 +56,12 @@ export function TopNav() {
         </motion.div>
       </div>
 
-      {/* Аватарка (Кабинет кибера) */}
-      <Link to="/profile" className="absolute top-4 right-4 z-30 flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60">
+      {/* Аватарка (Кабинет кибера) — кликабельна, но без открытия меню */}
+      <Link
+        to="/profile"
+        className="absolute top-4 right-4 z-30 flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="hidden text-right md:block">
           <div className="font-mono text-[9px] tracking-widest text-foreground/50">USER</div>
           <div className="text-xs text-cyan">0xnazr</div>
@@ -79,9 +83,9 @@ export function TopNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -60 }}
             transition={{ duration: 0.3 }}
-            className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
+            className="absolute inset-x-0 top-0 flex items-center justify-center px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
-            {/* Логотип — КиберэдэН (синий + фиолетовый) */}
+            {/* Логотип — сурикен + «Кибер эдэН» (Кибер — белый с перекрашиванием) */}
             <Link to="/" className="group flex items-center gap-3">
               <div className="relative h-10 w-10">
                 <motion.img
@@ -94,19 +98,24 @@ export function TopNav() {
               </div>
               <div className="hidden sm:block">
                 <div className="flex flex-col">
-                  <span className="text-cyan font-bold text-lg">Кибер</span>
+                  <motion.span
+                    className="font-bold text-lg"
+                    whileHover={{ color: "#00bfff" }}
+                  >
+                    Кибер
+                  </motion.span>
                   <span className="text-neon font-bold text-lg">эдэН</span>
                 </div>
               </div>
             </Link>
 
-            {/* Центральное меню */}
-            <nav className="pointer-events-auto flex items-center gap-2 rounded-full border border-border bg-background/30 px-4 py-2 backdrop-blur-xl">
+            {/* Центральное меню (выровнено по центру) */}
+            <nav className="pointer-events-auto flex items-center justify-center gap-1 rounded-full border border-border bg-background/30 px-3 py-1.5 backdrop-blur-xl">
               {leftItems.map((it) => (
                 <Link
                   key={it.label}
                   to={it.to}
-                  className="relative rounded-full px-4 py-1.5 text-xs uppercase tracking-wider text-foreground/70 transition-colors hover:text-foreground hover:bg-[var(--neon)]/10"
+                  className="relative rounded-full px-3 py-1 text-xs uppercase tracking-wider text-foreground/70 transition-colors hover:text-foreground hover:bg-[var(--neon)]/10"
                   activeProps={{ className: "text-foreground bg-[var(--neon)]/15 shadow-[0_0_18px_var(--neon)]/30" }}
                   activeOptions={{ exact: true }}
                 >
@@ -115,14 +124,14 @@ export function TopNav() {
               ))}
               
               {/* Разделитель — пустое место */}
-              <span className="w-6" />
+              <span className="w-4" />
 
               {/* Правая группа */}
               {rightItems.map((it) => (
                 <Link
                   key={it.label}
                   to={it.to}
-                  className="relative rounded-full px-4 py-1.5 text-xs uppercase tracking-wider text-foreground/70 transition-colors hover:text-foreground hover:bg-[var(--neon)]/10"
+                  className="relative rounded-full px-3 py-1 text-xs uppercase tracking-wider text-foreground/70 transition-colors hover:text-foreground hover:bg-[var(--neon)]/10"
                   activeProps={{ className: "text-foreground bg-[var(--neon)]/15 shadow-[0_0_18px_var(--neon)]/30" }}
                   activeOptions={{ exact: true }}
                 >
