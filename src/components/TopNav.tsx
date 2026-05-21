@@ -16,10 +16,10 @@ export function TopNav() {
 
   return (
     <div className="absolute inset-x-0 top-0 z-30">
-      {/* Кнопка открытия (стрелочка) */}
+      {/* Кнопка открытия (стрелочка) — в синем квадрате */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="absolute top-4 right-4 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/60 backdrop-blur-md transition-all hover:border-white/30"
+        className="absolute top-4 left-4 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/60 backdrop-blur-md transition-all hover:border-white/30"
         aria-label="Toggle navigation"
       >
         <svg
@@ -79,23 +79,23 @@ export function TopNav() {
                 </Link>
               ))}
             </nav>
-
-            {/* Аватарка в правом углу */}
-            <Link to="/profile" className="group relative flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60">
-              <div className="hidden text-right md:block">
-                <div className="font-mono text-[9px] tracking-widest text-foreground/50">USER</div>
-                <div className="text-xs text-cyan">0xnazr</div>
-              </div>
-              <div className="relative h-9 w-9 overflow-hidden rounded-full border border-[var(--cyan)]/60 shadow-[0_0_18px_var(--cyan)]/50">
-                <div className="absolute inset-0 bg-[conic-gradient(from_120deg,var(--neon),var(--cyan),var(--acid),var(--neon))] opacity-90" />
-                <div className="absolute inset-[2px] grid place-items-center rounded-full bg-background font-mono text-[10px] text-foreground">
-                  N
-                </div>
-              </div>
-            </Link>
           </motion.header>
         )}
       </AnimatePresence>
+
+      {/* Аватарка (Кабинет кибера) — в красном квадрате */}
+      <Link to="/profile" className="absolute top-4 right-4 z-30 flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60">
+        <div className="hidden text-right md:block">
+          <div className="font-mono text-[9px] tracking-widest text-foreground/50">USER</div>
+          <div className="text-xs text-cyan">0xnazr</div>
+        </div>
+        <div className="relative h-9 w-9 overflow-hidden rounded-full border border-[var(--cyan)]/60 shadow-[0_0_18px_var(--cyan)]/50">
+          <div className="absolute inset-0 bg-[conic-gradient(from_120deg,var(--neon),var(--cyan),var(--acid),var(--neon))] opacity-90" />
+          <div className="absolute inset-[2px] grid place-items-center rounded-full bg-background font-mono text-[10px] text-foreground">
+            N
+          </div>
+        </div>
+      </Link>
     </div>
   );
 }
