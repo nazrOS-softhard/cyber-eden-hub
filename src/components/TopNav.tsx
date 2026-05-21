@@ -35,9 +35,9 @@ export function TopNav() {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {/* Стрелка — появляется при наведении, ровно по центру */}
+      {/* Стрелка — появляется при наведении */}
       <div
-        className="absolute inset-x-0 top-0 z-40 h-24 cursor-pointer flex items-center justify-center"
+        className="absolute inset-x-0 top-0 z-40 h-24 flex items-center justify-center"
         onClick={() => setIsOpen(!isOpen)}
       >
         <motion.div
@@ -81,7 +81,7 @@ export function TopNav() {
             transition={{ duration: 0.3 }}
             className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
-            {/* Сурикен в левом верхнем углу (с вращением) */}
+            {/* Логотип — КиберэдэН (синий + фиолетовый) */}
             <Link to="/" className="group flex items-center gap-3">
               <div className="relative h-10 w-10">
                 <motion.img
@@ -93,14 +93,14 @@ export function TopNav() {
                 />
               </div>
               <div className="hidden sm:block">
-                <div className="font-mono text-[9px] tracking-[0.35em] text-foreground/50">NAZROS // OS</div>
-                <div className="font-display text-base font-bold leading-none tracking-tight">
-                  киберэдэ<span className="text-neon">Н</span>
+                <div className="flex flex-col">
+                  <span className="text-cyan font-bold text-lg">Кибер</span>
+                  <span className="text-neon font-bold text-lg">эдэН</span>
                 </div>
               </div>
             </Link>
 
-            {/* Меню (кликабельное) */}
+            {/* Центральное меню */}
             <nav className="pointer-events-auto flex items-center gap-2 rounded-full border border-border bg-background/30 px-4 py-2 backdrop-blur-xl">
               {leftItems.map((it) => (
                 <Link
