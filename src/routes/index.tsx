@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react"; // добавили useState и useEffect
 import { RainBackground } from "@/components/RainBackground";
 import { TopNav } from "@/components/TopNav";
 
@@ -18,6 +19,23 @@ export const Route = createFileRoute("/")({
 });
 
 function Landing() {
+  // Состояние для значения Gbit
+  const [gbit, setGbit] = useState(1.2);
+
+  // Имитация изменения трафика (каждые 2 секунды)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGbit((prev) => {
+        const change = (Math.random() - 0.5) * 0.2;
+        return Math.min(2.5, Math.max(0.3, prev + change));
+      });
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Определяем цвет для Gbit
+  const gbitColor = gbit >= 1.5 ? "#8a2be2" : gbit >= 1 ? "#00bfff" : "#ff0040";
+
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-background text-foreground">
       {/* Full-screen cyber-hero background */}
@@ -104,53 +122,44 @@ function Landing() {
         className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between px-5 py-3 font-mono text-[10px] tracking-widest md:px-8"
       >
         <div className="flex items-center gap-4">
+          {/* UPLINK — переливается синим и фиолетовым */}
           <motion.span
             animate={{
-              color: ["#ffffff", "#00ffff", "#ff00ff", "#ffffff"],
+              color: ["#00bfff", "#8a2be2", "#00bfff"],
             }}
             transition={{
-              duration: 4,
+              duration: 3,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: "linear",
             }}
           >
             UPLINK
           </motion.span>
           <span className="text-foreground/30">·</span>
+
+          {/* Gbit — цвет зависит от значения */}
           <motion.span
             animate={{
-              color: ["#ffffff", "#ff0040", "#ff4d4d", "#ffffff"],
+              color: gbitColor,
             }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            transition={{ duration: 0.5 }}
           >
-            1.2 Gbit
+            {gbit.toFixed(2)} Gbit
           </motion.span>
           <span className="text-foreground/30">|</span>
-          <motion.span
-            animate={{
-              color: ["#ffffff", "#00ff00", "#00ffff", "#ffffff"],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            XP · 18,420
-          </motion.span>
+
+          {/* XP — белый */}
+          <span className="hidden sm:inline">XP · 18,420</span>
         </div>
 
         <div className="flex items-center gap-4">
+          {/* REC — мигает */}
           <motion.span
             animate={{
-              color: ["#ff0040", "#ff4d4d", "#ff0040"],
+              opacity: [1, 0.2, 1],
             }}
             transition={{
-              duration: 2,
+              duration: 1.5,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -158,19 +167,7 @@ function Landing() {
           >
             REC ●
           </motion.span>
-          <motion.span
-            animate={{
-              color: ["#00ffff", "#00bfff", "#00ffff"],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="hidden sm:inline text-cyan"
-          >
-            user_0xnazr
-          </motion.span>
+          <span className="hidden sm:inline text-cyan">user_0xnazr</span>
         </div>
       </motion.div>
     </div>
