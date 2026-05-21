@@ -153,7 +153,16 @@ export const Route = createFileRoute("/market")({
         {/* Модальное окно с полным описанием */}
         {selectedProduct && (
           <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" onClick={() => setSelectedProduct(null)}>
-            <div className="bg-[#0d0d0d] border border-[var(--neon)]/50 rounded-lg w-full h-full flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-[#0d0d0d] border border-[var(--neon)]/50 rounded-lg w-full h-[90vh] flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+              {/* Стрелка для закрытия */}
+              <div
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-50 cursor-pointer"
+                onClick={() => setSelectedProduct(null)}
+              >
+                <img src="/arrow.svg" alt="Закрыть" className="h-8 w-8 object-contain opacity-60 hover:opacity-100 transition" />
+              </div>
+
+              {/* Фото на весь экран */}
               <div className="flex-1 relative">
                 <img
                   src={selectedProduct.image || "https://via.placeholder.com/800x600?text=+"}
@@ -161,6 +170,8 @@ export const Route = createFileRoute("/market")({
                   className="w-full h-full object-contain"
                 />
               </div>
+
+              {/* Кнопка и описание */}
               <div className="p-6 border-t border-gray-800">
                 <h3 className="text-2xl font-bold font-display mb-2">{selectedProduct.name}</h3>
                 <p className="text-sm text-gray-400 mb-4">{selectedProduct.description}</p>
