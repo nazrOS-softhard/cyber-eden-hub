@@ -120,54 +120,62 @@ export const Route = createFileRoute("/market")({
         title={<><span className="text-neon">МАР</span>КЕТ</>}
         subtitle="ЭКОСИСТЕМА NAZROS — ПОДДЕРЖИВАЙ РАЗРАБОТЧИКОВ"
       >
-        <div className="flex flex-wrap gap-4 mb-12 justify-center mt-24">
-          {["ВСЕ ИНВЕНТАРЬ", "УСТРОЙСТВА", "СОФТ", "OS BUILDER"].map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-6 py-2 rounded border text-sm tracking-wider transition ${
-                selectedCategory === cat
-                  ? "bg-[var(--neon)]/20 border-[var(--neon)] text-[var(--neon)]"
-                  : "bg-transparent border-gray-700 text-gray-400 hover:border-gray-500"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {filteredProducts.map((product) => (
-            <motion.div
-              key={product.id}
-              whileHover={{ scale: 1.01 }}
-              className="group flex flex-col bg-[#0d0d0d] border border-gray-800 rounded overflow-hidden hover:border-[var(--neon)]/50 transition-all"
-            >
-              <div className="h-48 bg-gray-900 relative flex items-center justify-center overflow-hidden">
-                <img
-                  src={product.image || "https://via.placeholder.com/200x200?text=+"}
-                  alt={product.name}
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition"
-                />
-                <div className="absolute top-3 left-3 bg-black/60 px-2 py-0.5 rounded text-[10px] uppercase tracking-wider text-gray-400 border border-white/10">
-                  {product.type}
-                </div>
-              </div>
-
-              <div className="p-4 text-left">
-                <div className="flex justify-between items-start mb-1">
-                  <h3 className="text-lg font-bold font-display text-white">{product.name}</h3>
-                  <span className="text-[var(--neon)] font-bold text-sm">
-                    {product.price > 0 ? `${product.price} XP` : "FREE"}
-                  </span>
-                </div>
-                <p className="text-xs text-gray-400 leading-relaxed">{product.description}</p>
-                <button className="mt-3 w-full bg-[var(--neon)]/80 hover:bg-[var(--neon)] text-black font-bold py-2 rounded text-xs tracking-wider transition">
-                  [ ПРИОБРЕСТИ ]
+        <div className="h-screen flex flex-col overflow-hidden">
+          {/* Фильтры — фиксированные вверху */}
+          <div className="flex-none">
+            <div className="flex flex-wrap gap-3 mb-4 justify-center">
+              {["ВСЕ ИНВЕНТАРЬ", "УСТРОЙСТВА", "СОФТ", "OS BUILDER"].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-4 py-1.5 rounded-full text-xs tracking-wider transition ${
+                    selectedCategory === cat
+                      ? "bg-[var(--neon)]/20 border border-[var(--neon)] text-[var(--neon)]"
+                      : "bg-transparent border border-gray-700 text-gray-400 hover:border-gray-500"
+                  }`}
+                >
+                  {cat}
                 </button>
-              </div>
-            </motion.div>
-          ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Сетка товаров — с прокруткой */}
+          <div className="flex-1 overflow-y-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto pb-8">
+              {filteredProducts.map((product) => (
+                <motion.div
+                  key={product.id}
+                  whileHover={{ scale: 1.01 }}
+                  className="bg-[#0d0d0d] border border-gray-800 rounded-lg overflow-hidden hover:border-[var(--neon)]/50 transition-all"
+                >
+                  <div className="h-32 bg-gray-900 relative">
+                    <img
+                      src={product.image || "https://via.placeholder.com/200x200?text=+"}
+                      alt={product.name}
+                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition"
+                    />
+                    <div className="absolute top-2 right-2 bg-black/60 px-2 py-0.5 rounded text-[10px] uppercase tracking-wider text-gray-400 border border-white/10">
+                      {product.type}
+                    </div>
+                  </div>
+
+                  <div className="p-3">
+                    <div className="flex justify-between items-start mb-1">
+                      <h3 className="text-base font-bold font-display">{product.name}</h3>
+                      <span className="text-[var(--neon)] font-bold text-sm">
+                        {product.price > 0 ? `${product.price} XP` : "FREE"}
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-400 leading-relaxed line-clamp-2">{product.description}</p>
+                    <button className="mt-2 w-full bg-[var(--neon)]/80 hover:bg-[var(--neon)] text-black font-bold py-1.5 rounded text-xs tracking-wider transition">
+                      [ ПРИОБРЕСТИ ]
+                    </button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </PageShell>
     );
