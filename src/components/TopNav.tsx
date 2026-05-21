@@ -2,21 +2,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
 
-const leftItems = [
-  { label: "Главная", to: "/" },
-  { label: "Дашборд", to: "/dashboard" },
-  { label: "Журнал", to: "/journal" },
-];
+const allItems = [
+  { label: "ГЛАВНАЯ", to: "/" },
+  { label: "ДАШБОРД", to: "/dashboard" },
+  { label: "ЖУРНАЛ", to: "/journal" },
+  { label: "ТРАНСЛЯЦИИ", to: "/streams" },
+  { label: "СОБЫТИЯ", to: "/events" },
+  { label: "МАРКЕТ", to: "/market" },
+] as const;
 
-const rightItems = [
-  { label: "Трансляции", to: "/streams" },
-  { label: "События", to: "/events" },
-  { label: "Маркет", to: "/market" },
-];
+const leftItems = allItems.slice(0, 3); // ГЛАВНАЯ, ДАШБОРД, ЖУРНАЛ
+const rightItems = allItems.slice(3);   // ТРАНСЛЯЦИИ, СОБЫТИЯ, МАРКЕТ
 
 export function TopNav() {
-  const [isOpen, setIsOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,19 +35,26 @@ export function TopNav() {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {/* Стрелка — в центре, анимированная */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="absolute top-4 left-1/2 -translate-x-1/2 z-40 flex h-6 w-6 items-center justify-center transition-transform hover:scale-110"
+      {/* Стрелка — выдвигается при наведении */}
+      <motion.div
+        className="absolute top-0 left-1/2 -translate-x-1/2 z-40"
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: isHovering ? 10 : -30, opacity: isHovering ? 1 : 0 }}
+        transition={{ duration: 0.4 }}
       >
-        <motion.img
-          src="/arrow.svg"
-          alt="Меню"
-          className="h-full w-full object-contain"
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.4 }}
-        />
-      </button>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex h-6 w-6 items-center justify-center transition-transform hover:scale-110"
+        >
+          <motion.img
+            src="/arrow.svg"
+            alt="Меню"
+            className="h-full w-full object-contain"
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            transition={{ duration: 0.4 }}
+          />
+        </button>
+      </motion.div>
 
       {/* Аватарка (Кабинет кибера) */}
       <Link to="/profile" className="absolute top-4 right-4 z-30 flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60">
@@ -63,7 +70,7 @@ export function TopNav() {
         </div>
       </Link>
 
-      {/* Меню, которое выдвигается */}
+      {/* Меню */}
       <AnimatePresence>
         {isOpen && (
           <motion.header
@@ -72,28 +79,9 @@ export function TopNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -60 }}
             transition={{ duration: 0.3 }}
-            className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
+            className="absolute inset-x-0 top-0 flex items-center justify-center px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
-            {/* Логотип (сурикен) */}
-            <Link to="/" className="group flex items-center gap-3">
-              <div className="relative h-10 w-10">
-                <motion.img
-                  src="/cybereden-logo.svg"
-                  alt="Сурикен nazrOS"
-                  className="h-full w-full object-contain drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]"
-                  animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
-                />
-              </div>
-              <div className="hidden sm:block">
-                <div className="font-mono text-[9px] tracking-[0.35em] text-foreground/50">NAZROS // OS</div>
-                <div className="font-display text-base font-bold leading-none tracking-tight">
-                  киберэдэ<span className="text-neon">Н</span>
-                </div>
-              </div>
-            </Link>
-
-            {/* Левая группа меню */}
+            {/* Левая группа */}
             <nav className="pointer-events-auto flex items-center gap-1 rounded-full border border-border bg-background/30 px-2 py-1.5 backdrop-blur-xl">
               {leftItems.map((it) => (
                 <Link
@@ -108,7 +96,7 @@ export function TopNav() {
               ))}
             </nav>
 
-            {/* Правая группа меню */}
+            {/* Правая группа */}
             <nav className="pointer-events-auto flex items-center gap-1 rounded-full border border-border bg-background/30 px-2 py-1.5 backdrop-blur-xl">
               {rightItems.map((it) => (
                 <Link
