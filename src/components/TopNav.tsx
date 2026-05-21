@@ -2,17 +2,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
 
-const items = [
+const leftItems = [
   { label: "Главная", to: "/" },
   { label: "Дашборд", to: "/dashboard" },
   { label: "Журнал", to: "/journal" },
+];
+
+const rightItems = [
   { label: "Трансляции", to: "/streams" },
   { label: "События", to: "/events" },
   { label: "Маркет", to: "/market" },
-] as const;
+];
 
 export function TopNav() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,13 +30,23 @@ export function TopNav() {
   }, []);
 
   return (
-    <div className="absolute inset-x-0 top-0 z-30">
-      {/* Кнопка открытия — стрелка из public/arrow.svg */}
+    <div
+      className="absolute inset-x-0 top-0 z-30 h-24"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {/* Стрелка — в центре, анимированная */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="absolute top-4 left-1/2 -translate-x-1/2 z-40 flex h-6 w-6 items-center justify-center transition-transform hover:scale-110"
       >
-        <img src="/Arrow.svg" alt="Меню" className="h-full w-full object-contain" />
+        <motion.img
+          src="/arrow.svg"
+          alt="Меню"
+          className="h-full w-full object-contain"
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.4 }}
+        />
       </button>
 
       {/* Аватарка (Кабинет кибера) */}
@@ -49,7 +63,7 @@ export function TopNav() {
         </div>
       </Link>
 
-      {/* Меню, которое выдвигается сверху */}
+      {/* Меню, которое выдвигается */}
       <AnimatePresence>
         {isOpen && (
           <motion.header
@@ -60,7 +74,7 @@ export function TopNav() {
             transition={{ duration: 0.3 }}
             className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
-            {/* Логотип — сурикен */}
+            {/* Логотип (сурикен) */}
             <Link to="/" className="group flex items-center gap-3">
               <div className="relative h-10 w-10">
                 <motion.img
@@ -79,9 +93,24 @@ export function TopNav() {
               </div>
             </Link>
 
-            {/* Центральное меню */}
-            <nav className="pointer-events-auto hidden items-center gap-1 rounded-full border border-border bg-background/30 px-2 py-1.5 backdrop-blur-xl md:flex">
-              {items.map((it) => (
+            {/* Левая группа меню */}
+            <nav className="pointer-events-auto flex items-center gap-1 rounded-full border border-border bg-background/30 px-2 py-1.5 backdrop-blur-xl">
+              {leftItems.map((it) => (
+                <Link
+                  key={it.label}
+                  to={it.to}
+                  className="relative rounded-full px-4 py-1.5 text-xs uppercase tracking-wider text-foreground/70 transition-colors hover:text-foreground"
+                  activeProps={{ className: "text-foreground bg-[var(--neon)]/15 shadow-[0_0_18px_var(--neon)]/30" }}
+                  activeOptions={{ exact: true }}
+                >
+                  {it.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Правая группа меню */}
+            <nav className="pointer-events-auto flex items-center gap-1 rounded-full border border-border bg-background/30 px-2 py-1.5 backdrop-blur-xl">
+              {rightItems.map((it) => (
                 <Link
                   key={it.label}
                   to={it.to}
