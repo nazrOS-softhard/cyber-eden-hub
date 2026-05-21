@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const items = [
   { label: "Главная", to: "/" },
@@ -13,40 +13,54 @@ const items = [
 
 export function TopNav() {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div className="absolute inset-x-0 top-0 z-30">
-      {/* Кнопка открытия (стрелочка) — в синем квадрате */}
+      {/* Кнопка открытия — стрелка из public/arrow.svg */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="absolute top-4 left-4 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/60 backdrop-blur-md transition-all hover:border-white/30"
-        aria-label="Toggle navigation"
+        className="absolute top-4 left-4 z-40 flex h-6 w-6 items-center justify-center transition-transform hover:scale-110"
       >
-        <svg
-          viewBox="0 0 24 24"
-          className="h-5 w-5 fill-none stroke-white"
-          strokeWidth="2"
-          strokeLinecap="round"
-        >
-          {isOpen ? (
-            <path d="M6 18L18 6M6 6l12 12" />
-          ) : (
-            <path d="M4 6h16M4 12h16M4 18h16" />
-          )}
-        </svg>
+        <img src="/Arrow.svg" alt="Меню" className="h-full w-full object-contain" />
       </button>
 
-      {/* Меню, которое выдвигается */}
+      {/* Аватарка (Кабинет кибера) */}
+      <Link to="/profile" className="absolute top-4 right-4 z-30 flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60">
+        <div className="hidden text-right md:block">
+          <div className="font-mono text-[9px] tracking-widest text-foreground/50">USER</div>
+          <div className="text-xs text-cyan">0xnazr</div>
+        </div>
+        <div className="relative h-9 w-9 overflow-hidden rounded-full border border-[var(--cyan)]/60 shadow-[0_0_18px_var(--cyan)]/50">
+          <div className="absolute inset-0 bg-[conic-gradient(from_120deg,var(--neon),var(--cyan),var(--acid),var(--neon))] opacity-90" />
+          <div className="absolute inset-[2px] grid place-items-center rounded-full bg-background font-mono text-[10px] text-foreground">
+            N
+          </div>
+        </div>
+      </Link>
+
+      {/* Меню, которое выдвигается сверху */}
       <AnimatePresence>
         {isOpen && (
           <motion.header
-            initial={{ opacity: 0, y: -20 }}
+            ref={menuRef}
+            initial={{ opacity: 0, y: -60 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: -60 }}
             transition={{ duration: 0.3 }}
             className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
-            {/* Логотип — сурикен через <img> с вращением */}
+            {/* Логотип — сурикен */}
             <Link to="/" className="group flex items-center gap-3">
               <div className="relative h-10 w-10">
                 <motion.img
@@ -82,20 +96,6 @@ export function TopNav() {
           </motion.header>
         )}
       </AnimatePresence>
-
-      {/* Аватарка (Кабинет кибера) — в красном квадрате */}
-      <Link to="/profile" className="absolute top-4 right-4 z-30 flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60">
-        <div className="hidden text-right md:block">
-          <div className="font-mono text-[9px] tracking-widest text-foreground/50">USER</div>
-          <div className="text-xs text-cyan">0xnazr</div>
-        </div>
-        <div className="relative h-9 w-9 overflow-hidden rounded-full border border-[var(--cyan)]/60 shadow-[0_0_18px_var(--cyan)]/50">
-          <div className="absolute inset-0 bg-[conic-gradient(from_120deg,var(--neon),var(--cyan),var(--acid),var(--neon))] opacity-90" />
-          <div className="absolute inset-[2px] grid place-items-center rounded-full bg-background font-mono text-[10px] text-foreground">
-            N
-          </div>
-        </div>
-      </Link>
     </div>
   );
 }
