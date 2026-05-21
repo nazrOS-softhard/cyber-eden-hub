@@ -16,21 +16,24 @@ export function TopNav() {
 
   return (
     <div
-      className="absolute inset-x-0 top-0 z-30 h-24" // увеличили высоту области наведения
+      className="absolute inset-x-0 top-0 z-30 h-24"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      {/* Логотип — прижат к левому краю */}
+      {/* Логотип — вращается только сурикен */}
       <Link to="/" className="absolute left-0 top-0 z-40 p-4">
-        <div className="flex items-center gap-2">
-          <img
+        <div className="relative w-24 h-24">
+          {/* Вращающийся сурикен */}
+          <motion.img
             src="/cybereden-logo.svg"
             alt="Сурикен nazrOS"
-            className="h-10 w-10 object-contain"
+            className="h-full w-full object-contain"
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
           />
-          <div className="flex items-center gap-1">
-            <span className="font-bold text-[20px]">Кибер</span>
-            <span className="text-neon font-bold text-[20px]">эдэН</span>
+          {/* Текст внутри (не вращается) */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="font-bold text-sm text-white">КиберэдэН</span>
           </div>
         </div>
       </Link>
