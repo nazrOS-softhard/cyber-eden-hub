@@ -56,7 +56,7 @@ export function TopNav() {
         </motion.div>
       </div>
 
-      {/* Аватарка (Кабинет кибера) — кликабельна, но без открытия меню */}
+      {/* Аватарка (Кабинет кибера) — кликабельна */}
       <Link
         to="/profile"
         className="absolute top-4 right-4 z-30 flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60"
@@ -85,7 +85,7 @@ export function TopNav() {
             transition={{ duration: 0.3 }}
             className="absolute inset-x-0 top-0 flex items-center justify-center px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
-            {/* Логотип — сурикен + «Кибер эдэН» (Кибер — белый с перекрашиванием) */}
+            {/* Логотип — в одну строку */}
             <Link to="/" className="group flex items-center gap-3">
               <div className="relative h-10 w-10">
                 <motion.img
@@ -97,7 +97,7 @@ export function TopNav() {
                 />
               </div>
               <div className="hidden sm:block">
-                <div className="flex flex-col">
+                <div className="flex items-center gap-1">
                   <motion.span
                     className="font-bold text-lg"
                     whileHover={{ color: "#00bfff" }}
@@ -109,7 +109,7 @@ export function TopNav() {
               </div>
             </Link>
 
-            {/* Центральное меню (выровнено по центру) */}
+            {/* Центральное меню — выровнено по центру */}
             <nav className="pointer-events-auto flex items-center justify-center gap-1 rounded-full border border-border bg-background/30 px-3 py-1.5 backdrop-blur-xl">
               {leftItems.map((it) => (
                 <Link
