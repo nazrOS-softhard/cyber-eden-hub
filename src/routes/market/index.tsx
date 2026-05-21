@@ -6,8 +6,8 @@ import { PageShell } from "@/components/PageShell";
 const products = [
   {
     id: 1,
-    name: "CyberDeck Pro X1",
-    description: "Устройство клоН по типу флип-дисплея с открытым железом и нейросетевым ускорителем",
+    name: "cloN ver. 1.0",
+    description: "Устройство клоН цифровая т флип-дисплея с открытым железом и нейросетевым ускорителем",
     price: 89900,
     category: "УСТРОЙСТВА",
     type: "DEVICE",
@@ -88,7 +88,7 @@ export const Route = createFileRoute("/market")({
     return (
       <PageShell
         tag="КИБЕРСИСТЕМА — ВЗЛОМАЙ РЕАЛЬНОСТЬ"
-        title={<span className="text-4xl md:text-6xl font-bold text-neon">МАРКЕТ</span>}
+        title={<span className="text-5xl md:text-6xl font-bold text-neon">МАРКЕТ</span>}
       >
         <div className="h-screen flex flex-col overflow-hidden">
           {/* Фильтры */}
