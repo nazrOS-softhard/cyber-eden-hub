@@ -29,57 +29,16 @@ export function TopNav() {
             transition={{ duration: 0.3 }}
             className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
-            {/* Логотип — точная копия сурикена с фото */}
+            {/* Логотип — сурикен через <img> с вращением */}
             <Link to="/" className="group flex items-center gap-3">
-              <div className="relative h-10 w-10 flex items-center justify-center">
-                <svg
-                  viewBox="0 0 200 200"
-                  className="h-10 w-10 animate-spin-slow drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]"
-                  style={{ animationDuration: '6s' }}
-                >
-                  <defs>
-                    <linearGradient id="neonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#ff0040" />
-                      <stop offset="50%" stopColor="#ff4d4d" />
-                      <stop offset="100%" stopColor="#ff0040" />
-                    </linearGradient>
-                    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#00ffff" />
-                      <stop offset="50%" stopColor="#ff00ff" />
-                      <stop offset="100%" stopColor="#00ffff" />
-                    </linearGradient>
-                    <filter id="glow">
-                      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                      <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  {/* Только внутренняя форма — четыре острых лезвия */}
-                  <path
-                    d="M100 10 C110 50 130 70 150 80 C130 90 110 100 100 130 C90 100 70 90 50 80 C70 70 90 50 100 10 Z"
-                    fill="none"
-                    stroke="url(#neonGrad)"
-                    strokeWidth="4"
-                    filter="url(#glow)"
-                  />
-                  {/* Текст в центре */}
-                  <text
-                    x="100"
-                    y="110"
-                    textAnchor="middle"
-                    fontSize="14"
-                    fontWeight="bold"
-                    fill="url(#textGrad)"
-                    fontFamily="monospace"
-                    className="select-none"
-                  >
-                    nazrOS
-                  </text>
-                  {/* Центральная точка (свечение) */}
-                  <circle cx="100" cy="100" r="4" fill="#ffffff" filter="url(#glow)" />
-                </svg>
+              <div className="relative h-10 w-10">
+                <motion.img
+                  src="/cybereden-logo.svg"
+                  alt="Сурикен nazrOS"
+                  className="h-full w-full object-contain drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]"
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
+                />
               </div>
               <div className="hidden sm:block">
                 <div className="font-mono text-[9px] tracking-[0.35em] text-foreground/50">NAZROS // OS</div>
