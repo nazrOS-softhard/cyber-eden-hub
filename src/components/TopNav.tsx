@@ -35,7 +35,7 @@ export function TopNav() {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {/* Контейнер для клика — теперь кликабельная вся синяя область */}
+      {/* Контейнер для клика — кликабельная вся верхняя область */}
       <div
         className="absolute inset-x-0 top-0 z-40 h-24 cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
