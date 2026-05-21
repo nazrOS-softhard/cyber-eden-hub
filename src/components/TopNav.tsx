@@ -13,7 +13,7 @@ const items = [
 
 export function TopNav() {
   const [isOpen, setIsOpen] = useState(false);
-  const [shurikenColor, setShurikenColor] = useState("#8a2be2"); // фиолетовый
+  const [shurikenColor, setShurikenColor] = useState("#8a2be2");
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
   return (
@@ -22,9 +22,9 @@ export function TopNav() {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      {/* Логотип — сурикен с изменением цвета при нажатии */}
+      {/* Логотип — уменьшенный сурикен */}
       <Link to="/" className="absolute left-0 top-0 z-40 p-4">
-        <div className="relative w-24 h-24">
+        <div className="relative w-12 h-12">
           <motion.img
             src="/cybereden-logo.svg"
             alt="Сурикен nazrOS"
@@ -40,7 +40,10 @@ export function TopNav() {
               setIsTerminalOpen(!isTerminalOpen);
             }}
           >
-            <span className="font-bold text-sm text-white select-none">КиберэдэН</span>
+            <div className="flex items-center gap-1">
+              <span className="font-bold text-[10px] text-cyan">Кибер</span>
+              <span className="font-bold text-[10px] text-white">эдэН</span>
+            </div>
           </div>
         </div>
       </Link>
