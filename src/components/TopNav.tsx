@@ -35,14 +35,13 @@ export function TopNav() {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {/* Контейнер для клика — он только открывает меню, но не блокирует ссылки */}
+      {/* Стрелка — появляется при наведении, ровно по центру */}
       <div
-        className="absolute inset-x-0 top-0 z-40 h-24"
+        className="absolute inset-x-0 top-0 z-40 h-24 cursor-pointer flex items-center justify-center"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {/* Стрелка — появляется при наведении */}
         <motion.div
-          className="absolute top-0 left-[53%] -translate-x-1/2"
+          className="flex items-center justify-center"
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: isHovering ? 10 : -30, opacity: isHovering ? 1 : 0 }}
           transition={{ duration: 0.4 }}
@@ -80,10 +79,29 @@ export function TopNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -60 }}
             transition={{ duration: 0.3 }}
-            className="absolute inset-x-0 top-0 flex items-center justify-center px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
+            className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
-            {/* Ссылки внутри меню — гарантированно кликабельны */}
-            <div className="pointer-events-auto flex items-center gap-2 rounded-full border border-border bg-background/30 px-4 py-2 backdrop-blur-xl">
+            {/* Сурикен в левом верхнем углу (с вращением) */}
+            <Link to="/" className="group flex items-center gap-3">
+              <div className="relative h-10 w-10">
+                <motion.img
+                  src="/cybereden-logo.svg"
+                  alt="Сурикен nazrOS"
+                  className="h-full w-full object-contain"
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
+                />
+              </div>
+              <div className="hidden sm:block">
+                <div className="font-mono text-[9px] tracking-[0.35em] text-foreground/50">NAZROS // OS</div>
+                <div className="font-display text-base font-bold leading-none tracking-tight">
+                  киберэдэ<span className="text-neon">Н</span>
+                </div>
+              </div>
+            </Link>
+
+            {/* Меню (кликабельное) */}
+            <nav className="pointer-events-auto flex items-center gap-2 rounded-full border border-border bg-background/30 px-4 py-2 backdrop-blur-xl">
               {leftItems.map((it) => (
                 <Link
                   key={it.label}
@@ -111,7 +129,7 @@ export function TopNav() {
                   {it.label}
                 </Link>
               ))}
-            </div>
+            </nav>
           </motion.header>
         )}
       </AnimatePresence>
