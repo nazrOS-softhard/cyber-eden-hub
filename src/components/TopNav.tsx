@@ -38,13 +38,13 @@ export function TopNav() {
       {/* Стрелка — появляется при наведении */}
       <div
         className="absolute inset-x-0 top-0 z-40 h-24 flex items-center justify-center"
-        onClick={() => setIsOpen(!isOpen)}
       >
         <motion.div
           className="flex items-center justify-center"
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: isHovering ? 10 : -30, opacity: isHovering ? 1 : 0 }}
           transition={{ duration: 0.4 }}
+          onClick={() => setIsOpen(!isOpen)}
         >
           <motion.img
             src="/arrow.svg"
@@ -56,11 +56,10 @@ export function TopNav() {
         </motion.div>
       </div>
 
-      {/* Аватарка (Кабинет кибера) — кликабельна */}
+      {/* Аватарка (Кабинет кибера) */}
       <Link
         to="/profile"
         className="absolute top-4 right-4 z-30 flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60"
-        onClick={(e) => e.stopPropagation()}
       >
         <div className="hidden text-right md:block">
           <div className="font-mono text-[9px] tracking-widest text-foreground/50">USER</div>
@@ -109,7 +108,7 @@ export function TopNav() {
               </div>
             </Link>
 
-            {/* Центральное меню — выровнено по центру */}
+            {/* Центральное меню */}
             <nav className="pointer-events-auto flex items-center justify-center gap-1 rounded-full border border-border bg-background/30 px-3 py-1.5 backdrop-blur-xl">
               {leftItems.map((it) => (
                 <Link
