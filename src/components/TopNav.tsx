@@ -16,7 +16,7 @@ export function TopNav() {
 
   return (
     <div
-      className="absolute inset-x-0 top-0 z-30"
+      className="absolute inset-x-0 top-0 z-30 h-24" // увеличили высоту области наведения
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
@@ -29,13 +29,13 @@ export function TopNav() {
             className="h-10 w-10 object-contain"
           />
           <div className="flex items-center gap-1">
-            <span className="font-bold text-lg">Кибер</span>
-            <span className="text-neon font-bold text-lg">эдэН</span>
+            <span className="font-bold text-[20px]">Кибер</span>
+            <span className="text-neon font-bold text-[20px]">эдэН</span>
           </div>
         </div>
       </Link>
 
-      {/* Аватарка — в правом углу, всегда кликабельна */}
+      {/* Аватарка — в правом углу */}
       <Link to="/profile" className="absolute right-0 top-0 z-40 p-4">
         <div className="flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl hover:border-[var(--cyan)]/60">
           <div className="hidden text-right md:block">
@@ -54,12 +54,12 @@ export function TopNav() {
       {/* Меню — выезжает при наведении */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <motion.header
             initial={{ opacity: 0, y: -60 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -60 }}
             transition={{ duration: 0.3 }}
-            className="absolute inset-x-0 top-0 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl border-b border-white/10"
+            className="absolute inset-x-0 top-0 flex items-center justify-center bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
             <nav className="flex items-center gap-2 rounded-full border border-border bg-background/30 px-4 py-2 backdrop-blur-xl">
               {items.map((it) => (
@@ -74,7 +74,7 @@ export function TopNav() {
                 </Link>
               ))}
             </nav>
-          </motion.div>
+          </motion.header>
         )}
       </AnimatePresence>
     </div>
