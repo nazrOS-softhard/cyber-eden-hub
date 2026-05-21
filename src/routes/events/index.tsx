@@ -3,7 +3,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 
-// Данные событий (по вашему скриншоту)
+// Данные событий
 const events = [
   {
     id: 1,
@@ -90,10 +90,10 @@ export const Route = createFileRoute("/events")({
     return (
       <PageShell
         tag="БАЗА ЗНАНИЙ СИНДИКАТА"
-        title={<><span className="text-acid">СОБЫ</span>ТИЯ</>}
+        title={<><span className="text-acid text-4xl md:text-6xl">СОБЫ</span>ТИЯ</>}
       >
-        <div className="mt-12"> {/* отступ сверху */}
-          <div className="flex flex-wrap gap-3 mb-8 justify-center">
+        <div className="mt-12 w-full max-w-full">
+          <div className="flex flex-wrap gap-3 mb-8 justify-center w-full max-w-full">
             {["Все", "Кибербезопасность", "Геймдев", "Киберспорт", "Хакинг", "Цифровая этика"].map((topic) => (
               <button
                 key={topic}
@@ -109,7 +109,7 @@ export const Route = createFileRoute("/events")({
             ))}
           </div>
 
-          <div className="flex flex-col gap-4 max-w-5xl mx-auto w-full">
+          <div className="flex flex-col gap-4 w-full max-w-full">
             {filteredEvents.map((event) => (
               <motion.div
                 key={event.id}
