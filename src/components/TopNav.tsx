@@ -30,7 +30,7 @@ export function TopNav() {
       {/* Кнопка открытия — стрелка из public/arrow.svg */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="absolute top-4 left-4 z-40 flex h-6 w-6 items-center justify-center transition-transform hover:scale-110"
+        className="absolute top-4 left-1/2 -translate-x-1/2 z-40 flex h-6 w-6 items-center justify-center transition-transform hover:scale-110"
       >
         <img src="/Arrow.svg" alt="Меню" className="h-full w-full object-contain" />
       </button>
