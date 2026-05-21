@@ -13,6 +13,8 @@ const items = [
 
 export function TopNav() {
   const [isOpen, setIsOpen] = useState(false);
+  const [shurikenColor, setShurikenColor] = useState("#8a2be2"); // фиолетовый
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
   return (
     <div
@@ -20,20 +22,25 @@ export function TopNav() {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      {/* Логотип — вращается только сурикен */}
+      {/* Логотип — сурикен с изменением цвета при нажатии */}
       <Link to="/" className="absolute left-0 top-0 z-40 p-4">
         <div className="relative w-24 h-24">
-          {/* Вращающийся сурикен */}
           <motion.img
             src="/cybereden-logo.svg"
             alt="Сурикен nazrOS"
             className="h-full w-full object-contain"
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
+            style={{ filter: `drop-shadow(0 0 20px ${shurikenColor})` }}
           />
-          {/* Текст внутри (не вращается) */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-bold text-sm text-white">КиберэдэН</span>
+          <div
+            className="absolute inset-0 flex items-center justify-center cursor-pointer"
+            onClick={() => {
+              setShurikenColor(shurikenColor === "#8a2be2" ? "#00ff00" : "#8a2be2");
+              setIsTerminalOpen(!isTerminalOpen);
+            }}
+          >
+            <span className="font-bold text-sm text-white select-none">КиберэдэН</span>
           </div>
         </div>
       </Link>
