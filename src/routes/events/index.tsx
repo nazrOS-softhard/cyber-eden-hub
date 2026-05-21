@@ -90,7 +90,7 @@ export const Route = createFileRoute("/events")({
     return (
       <PageShell
         tag="БАЗА ЗНАНИЙ СИНДИКАТА"
-        title={<><span className="text-acid text-4xl md:text-6xl">СОБЫ</span>ТИЯ</>}
+        title={<><span className="text-cyan">СОБЫ</span><span className="text-acid">ТИЯ</span></>}
       >
         <div className="mt-12 w-full max-w-full">
           <div className="flex flex-wrap gap-3 mb-8 justify-center w-full max-w-full">
@@ -117,8 +117,8 @@ export const Route = createFileRoute("/events")({
                 className="group flex flex-col md:flex-row items-stretch bg-[#0d0d0d] border border-gray-800 rounded overflow-hidden hover:border-[var(--neon)]/50 transition-all"
               >
                 <div className="flex flex-col items-center justify-center p-6 bg-black/40 border-r border-gray-800 min-w-[140px]">
-                <div className="text-[10px] uppercase tracking-widest text-gray-500">ДАТА</div>
-<div className="text-4xl font-bold font-display text-white">{event.date || "TBA"}</div>
+                  <div className="text-[10px] uppercase tracking-widest text-gray-500">ДАТА</div>
+                  <div className="text-4xl font-bold font-display text-white">{event.date || "TBA"}</div>
                 </div>
 
                 <div className="flex-1 p-6 text-left">
@@ -142,9 +142,9 @@ export const Route = createFileRoute("/events")({
                 </div>
 
                 <div className="flex items-center justify-center p-6 border-l border-gray-800 min-w-[120px]">
-                 <button className="px-4 py-2 bg-[var(--neon)] hover:bg-[var(--cyan)] text-black font-bold text-xs tracking-wider rounded transition">
-  {event.status === "СКОРО" ? "ЖДИТЕ" : "УЧАСТВОВАТЬ"}
-</button>
+                  <button className="px-4 py-2 bg-[var(--neon)] hover:bg-[var(--cyan)] text-black font-bold text-xs tracking-wider rounded transition">
+                    {event.status === "СКОРО" ? "ЖДИТЕ" : "УЧАСТВОВАТЬ"}
+                  </button>
                 </div>
               </motion.div>
             ))}
