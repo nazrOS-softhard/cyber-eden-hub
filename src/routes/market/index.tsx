@@ -6,7 +6,7 @@ import { PageShell } from "@/components/PageShell";
 const products = [
   {
     id: 1,
-    name: "CyberDeck Pro X1",
+    name: "cloN ver. 1.0",
     description: "Устройство клоН по типу флип-дисплея с открытым железом и нейросетевым ускорителем",
     price: 89900,
     category: "УСТРОЙСТВА",
@@ -16,7 +16,7 @@ const products = [
   },
   {
     id: 2,
-    name: "NullPhone v2",
+    name: "GrowthN ver. 1.0",
     description: "Домашняя теплица ростН — автоматизированный комплекс для выращивания зелени с управлением через смартфон",
     price: 34900,
     category: "УСТРОЙСТВА",
@@ -26,7 +26,7 @@ const products = [
   },
   {
     id: 3,
-    name: "PITerminal Kit",
+    name: "biohN ver. 1.0",
     description: "Урбанистическая пасика биохН — компактный модуль для пчеловодства в городе с датчиками и системой мониторинга",
     price: 12900,
     category: "УСТРОЙСТВА",
@@ -36,7 +36,7 @@ const products = [
   },
   {
     id: 4,
-    name: "CipherScan Pro",
+    name: "blaN ver. 1.0",
     description: "Ноутбук разработчика блаН — многофункциональный инструмент с интегрированными модулями для обжимки кабелей, пультом управления манипуляторами и встроенным анализатором сигналов",
     price: 4900,
     category: "СОФТ",
@@ -87,13 +87,14 @@ export const Route = createFileRoute("/market")({
 
     return (
       <PageShell
-        tag="КИБЕРСИСТЕМА — ВЗЛОМАЙ РЕАЛЬНОСТЬ"
-        title={<span className="text-4xl md:text-6xl font-bold text-neon">МАРКЕТ</span>}
+        tag="КИБЕРСИСТЕМА nazrOS – ВЗЛОМАЙ РЕАЛЬНОСТЬ"
+        title={<span className="text-3xl md:text-5xl font-bold text-neon">МАРКЕТ</span>}
+        subtitle="ЦИФРОВЫЕ ПРОДУКТЫ И УСТРОЙСТВА"
       >
         <div className="h-screen flex flex-col overflow-hidden">
           {/* Фильтры */}
-          <div className="flex-none">
-            <div className="flex flex-wrap gap-2 mb-4 justify-center">
+          <div className="flex-none mb-8">
+            <div className="flex flex-wrap gap-2 justify-center">
               {["ВСЕ ИНВЕНТАРЬ", "УСТРОЙСТВА", "СОФТ", "OS BUILDER"].map((cat) => (
                 <button
                   key={cat}
@@ -112,7 +113,7 @@ export const Route = createFileRoute("/market")({
 
           {/* Сетка товаров */}
           <div className="flex-1 overflow-y-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-w-7xl mx-auto pb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto pb-8">
               {filteredProducts.map((product) => (
                 <motion.div
                   key={product.id}
@@ -152,23 +153,36 @@ export const Route = createFileRoute("/market")({
         {/* Модальное окно с полным описанием */}
         {selectedProduct && (
           <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" onClick={() => setSelectedProduct(null)}>
-            <div className="bg-[#0d0d0d] border border-[var(--neon)]/50 rounded-lg max-w-md w-full p-6" onClick={(e) => e.stopPropagation()}>
-              <div className="h-48 bg-gray-900 rounded-lg mb-4 relative">
+            <div className="bg-[#0d0d0d] border border-[var(--neon)]/50 rounded-lg w-full min-h-screen flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+              {/* Стрелка для закрытия */}
+              <div
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-50 cursor-pointer"
+                onClick={() => setSelectedProduct(null)}
+              >
+                <img src="/arrow.svg" alt="Закрыть" className="h-8 w-8 object-contain rotate-90 opacity-60 hover:opacity-100 transition" />
+              </div>
+
+              {/* Фото на весь экран */}
+              <div className="flex-1 relative">
                 <img
-                  src={selectedProduct.image || "https://via.placeholder.com/400x300?text=+"}
+                  src={selectedProduct.image || "https://via.placeholder.com/800x600?text=+"}
                   alt={selectedProduct.name}
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-contain"
                 />
               </div>
-              <h3 className="text-2xl font-bold font-display mb-2">{selectedProduct.name}</h3>
-              <p className="text-sm text-gray-400 mb-4">{selectedProduct.description}</p>
-              <div className="flex justify-between items-center">
-                <span className="text-[var(--neon)] font-bold">
-                  {selectedProduct.price > 0 ? `${selectedProduct.price} XP` : "FREE"}
-                </span>
-                <button className="px-4 py-1 bg-[var(--neon)]/80 hover:bg-[var(--neon)] text-black font-bold text-xs tracking-wider rounded transition">
-                  [ ПРИОБРЕСТИ ]
-                </button>
+
+              {/* Кнопка и описание */}
+              <div className="p-6 border-t border-gray-800">
+                <h3 className="text-2xl font-bold font-display mb-2">{selectedProduct.name}</h3>
+                <p className="text-sm text-gray-400 mb-4">{selectedProduct.description}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-[var(--neon)] font-bold">
+                    {selectedProduct.price > 0 ? `${selectedProduct.price} XP` : "FREE"}
+                  </span>
+                  <button className="px-4 py-1 bg-[var(--neon)]/80 hover:bg-[var(--neon)] text-black font-bold text-xs tracking-wider rounded transition">
+                    [ ПРИОБРЕСТИ ]
+                  </button>
+                </div>
               </div>
             </div>
           </div>
