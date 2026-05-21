@@ -7,7 +7,7 @@ const products = [
   {
     id: 1,
     name: "CyberDeck Pro X1",
-    description: "Ноутбук с открытым железом и нейросетевым ускорителем",
+    description: "Устройство клоН по типу флип-дисплея с открытым железом и нейросетевым ускорителем",
     price: 89900,
     category: "УСТРОЙСТВА",
     type: "DEVICE",
@@ -17,7 +17,7 @@ const products = [
   {
     id: 2,
     name: "NullPhone v2",
-    description: "Смартфон с GraphQL OS и шифрованным каналом",
+    description: "Домашняя теплица ростН — автоматизированный комплекс для выращивания зелени с управлением через смартфон",
     price: 34900,
     category: "УСТРОЙСТВА",
     type: "DEVICE",
@@ -27,7 +27,7 @@ const products = [
   {
     id: 3,
     name: "PITerminal Kit",
-    description: "Портативный хакинг-компьютер на базе RPi5",
+    description: "Урбанистическая пасика биохН — компактный модуль для пчеловодства в городе с датчиками и системой мониторинга",
     price: 12900,
     category: "УСТРОЙСТВА",
     type: "DEVICE",
@@ -36,6 +36,16 @@ const products = [
   },
   {
     id: 4,
+    name: "CipherScan Pro",
+    description: "Ноутбук разработчика блаН — многофункциональный инструмент с интегрированными модулями для обжимки кабелей, пультом управления манипуляторами и встроенным анализатором сигналов",
+    price: 4900,
+    category: "СОФТ",
+    type: "SOFTWARE",
+    image: "/market/blaN.png",
+    inStock: true,
+  },
+  {
+    id: 5,
     name: "nazrOS Core",
     description: "Основной дистрибутив экосистемы nazrOS",
     price: 0,
@@ -45,7 +55,7 @@ const products = [
     inStock: true,
   },
   {
-    id: 5,
+    id: 6,
     name: "nazrOS Sleath",
     description: "Privacy-first дистрибутив с hardened ядром",
     price: 0,
@@ -55,7 +65,7 @@ const products = [
     inStock: true,
   },
   {
-    id: 6,
+    id: 7,
     name: "nazrOS Dev Edition",
     description: "Версия для разработчиков с предустановленными инструментами",
     price: 0,
@@ -64,51 +74,12 @@ const products = [
     image: "/market/pin.png",
     inStock: true,
   },
-  {
-    id: 7,
-    name: "CipherScan Pro",
-    description: "Десктоп-утилита для пентеста и анализа кода",
-    price: 4900,
-    category: "СОФТ",
-    type: "SOFTWARE",
-    image: "/market/blaN.png",
-    inStock: true,
-  },
-  {
-    id: 8,
-    name: "PixelForge Studio",
-    description: "Редактор для создания пиксельной графики",
-    price: 2900,
-    category: "СОФТ",
-    type: "SOFTWARE",
-    image: "/market/blaN.png",
-    inStock: true,
-  },
-  {
-    id: 9,
-    name: "DataVault",
-    description: "Персональный менеджер паролей",
-    price: 1900,
-    category: "СОФТ",
-    type: "SOFTWARE",
-    image: "/market/blaN.png",
-    inStock: true,
-  },
-  {
-    id: 10,
-    name: "NetWatch Dashboard",
-    description: "Панель управления сетью",
-    price: 3500,
-    category: "СОФТ",
-    type: "SOFTWARE",
-    image: "/market/blaN.png",
-    inStock: true,
-  },
 ];
 
 export const Route = createFileRoute("/market")({
   component: () => {
     const [selectedCategory, setSelectedCategory] = useState("ВСЕ ИНВЕНТАРЬ");
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     const filteredProducts = selectedCategory === "ВСЕ ИНВЕНТАРЬ"
       ? products
@@ -116,19 +87,18 @@ export const Route = createFileRoute("/market")({
 
     return (
       <PageShell
-        tag="МАРКЕТПЛЕЙС // ЦИФРОВЫЕ ПРОДУКТЫ"
-        title={<><span className="text-neon">МАР</span>КЕТ</>}
-        subtitle="ЭКОСИСТЕМА NAZROS — ПОДДЕРЖИВАЙ РАЗРАБОТЧИКОВ"
+        tag="КИБЕРСИСТЕМА — ВЗЛОМАЙ РЕАЛЬНОСТЬ"
+        title={<span className="text-4xl md:text-6xl font-bold text-neon">МАРКЕТ</span>}
       >
         <div className="h-screen flex flex-col overflow-hidden">
-          {/* Фильтры — фиксированные вверху */}
+          {/* Фильтры */}
           <div className="flex-none">
-            <div className="flex flex-wrap gap-3 mb-4 justify-center">
+            <div className="flex flex-wrap gap-2 mb-4 justify-center">
               {["ВСЕ ИНВЕНТАРЬ", "УСТРОЙСТВА", "СОФТ", "OS BUILDER"].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-1.5 rounded-full text-xs tracking-wider transition ${
+                  className={`px-3 py-1 rounded-full text-xs tracking-wider transition ${
                     selectedCategory === cat
                       ? "bg-[var(--neon)]/20 border border-[var(--neon)] text-[var(--neon)]"
                       : "bg-transparent border border-gray-700 text-gray-400 hover:border-gray-500"
@@ -140,14 +110,15 @@ export const Route = createFileRoute("/market")({
             </div>
           </div>
 
-          {/* Сетка товаров — с прокруткой */}
+          {/* Сетка товаров */}
           <div className="flex-1 overflow-y-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto pb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-w-7xl mx-auto pb-8">
               {filteredProducts.map((product) => (
                 <motion.div
                   key={product.id}
-                  whileHover={{ scale: 1.01 }}
-                  className="bg-[#0d0d0d] border border-gray-800 rounded-lg overflow-hidden hover:border-[var(--neon)]/50 transition-all"
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-[#0d0d0d] border border-gray-800 rounded-lg overflow-hidden hover:border-[var(--neon)]/50 transition-all cursor-pointer"
+                  onClick={() => setSelectedProduct(product)}
                 >
                   <div className="h-32 bg-gray-900 relative">
                     <img
@@ -168,7 +139,7 @@ export const Route = createFileRoute("/market")({
                       </span>
                     </div>
                     <p className="text-xs text-gray-400 leading-relaxed line-clamp-2">{product.description}</p>
-                    <button className="mt-2 w-full bg-[var(--neon)]/80 hover:bg-[var(--neon)] text-black font-bold py-1.5 rounded text-xs tracking-wider transition">
+                    <button className="mt-2 w-full bg-[var(--neon)]/80 hover:bg-[var(--neon)] text-black font-bold py-1 rounded text-xs tracking-wider transition">
                       [ ПРИОБРЕСТИ ]
                     </button>
                   </div>
@@ -177,6 +148,31 @@ export const Route = createFileRoute("/market")({
             </div>
           </div>
         </div>
+
+        {/* Модальное окно с полным описанием */}
+        {selectedProduct && (
+          <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" onClick={() => setSelectedProduct(null)}>
+            <div className="bg-[#0d0d0d] border border-[var(--neon)]/50 rounded-lg max-w-md w-full p-6" onClick={(e) => e.stopPropagation()}>
+              <div className="h-48 bg-gray-900 rounded-lg mb-4 relative">
+                <img
+                  src={selectedProduct.image || "https://via.placeholder.com/400x300?text=+"}
+                  alt={selectedProduct.name}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              </div>
+              <h3 className="text-2xl font-bold font-display mb-2">{selectedProduct.name}</h3>
+              <p className="text-sm text-gray-400 mb-4">{selectedProduct.description}</p>
+              <div className="flex justify-between items-center">
+                <span className="text-[var(--neon)] font-bold">
+                  {selectedProduct.price > 0 ? `${selectedProduct.price} XP` : "FREE"}
+                </span>
+                <button className="px-4 py-1 bg-[var(--neon)]/80 hover:bg-[var(--neon)] text-black font-bold text-xs tracking-wider rounded transition">
+                  [ ПРИОБРЕСТИ ]
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </PageShell>
     );
   },
