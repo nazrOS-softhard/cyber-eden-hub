@@ -117,9 +117,8 @@ export const Route = createFileRoute("/events")({
                 className="group flex flex-col md:flex-row items-stretch bg-[#0d0d0d] border border-gray-800 rounded overflow-hidden hover:border-[var(--neon)]/50 transition-all"
               >
                 <div className="flex flex-col items-center justify-center p-6 bg-black/40 border-r border-gray-800 min-w-[140px]">
-                  <div className="text-[10px] uppercase tracking-widest text-gray-500">INVALID DATE</div>
-                  <div className="text-4xl font-bold font-display text-white">{event.date}</div>
-                  <div className="text-sm text-gray-500">NaN</div>
+                <div className="text-[10px] uppercase tracking-widest text-gray-500">ДАТА</div>
+<div className="text-4xl font-bold font-display text-white">{event.date || "TBA"}</div>
                 </div>
 
                 <div className="flex-1 p-6 text-left">
