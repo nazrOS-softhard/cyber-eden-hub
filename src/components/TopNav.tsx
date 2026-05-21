@@ -12,16 +12,33 @@ const items = [
 ] as const;
 
 export function TopNav() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div
-      className="absolute inset-x-0 top-0 z-30 h-16"
-      onMouseEnter={() => setIsVisible(true)}
-      onMouseLeave={() => setIsVisible(false)}
-    >
+    <div className="absolute inset-x-0 top-0 z-30">
+      {/* Кнопка открытия (стрелочка) */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="absolute top-4 right-4 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/60 backdrop-blur-md transition-all hover:border-white/30"
+        aria-label="Toggle navigation"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          className="h-5 w-5 fill-none stroke-white"
+          strokeWidth="2"
+          strokeLinecap="round"
+        >
+          {isOpen ? (
+            <path d="M6 18L18 6M6 6l12 12" />
+          ) : (
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          )}
+        </svg>
+      </button>
+
+      {/* Меню, которое выдвигается */}
       <AnimatePresence>
-        {isVisible && (
+        {isOpen && (
           <motion.header
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
