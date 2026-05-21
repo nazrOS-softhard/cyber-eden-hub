@@ -142,9 +142,9 @@ export const Route = createFileRoute("/events")({
                 </div>
 
                 <div className="flex items-center justify-center p-6 border-l border-gray-800 min-w-[120px]">
-                  <button className="px-4 py-2 bg-[var(--neon)]/80 hover:bg-[var(--neon)] text-black font-bold text-xs tracking-wider rounded transition">
-                    [ УЧАСТВОВАТЬ ]
-                  </button>
+                 <button className="px-4 py-2 bg-[var(--neon)] hover:bg-[var(--cyan)] text-black font-bold text-xs tracking-wider rounded transition">
+  {event.status === "СКОРО" ? "ЖДИТЕ" : "УЧАСТВОВАТЬ"}
+</button>
                 </div>
               </motion.div>
             ))}
