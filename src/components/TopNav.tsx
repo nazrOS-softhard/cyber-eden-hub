@@ -35,26 +35,27 @@ export function TopNav() {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {/* Стрелка — появляется при наведении */}
-      <motion.div
-        className="absolute top-0 left-1/2 -translate-x-1/2 z-40"
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: isHovering ? 10 : -30, opacity: isHovering ? 1 : 0 }}
-        transition={{ duration: 0.4 }}
+      {/* Контейнер для клика — теперь кликабельная вся синяя область */}
+      <div
+        className="absolute inset-x-0 top-0 z-40 h-24 cursor-pointer"
+        onClick={() => setIsOpen(!isOpen)}
       >
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex h-6 w-6 items-center justify-center transition-transform hover:scale-110"
+        {/* Стрелка — появляется при наведении */}
+        <motion.div
+          className="absolute top-0 left-1/2 -translate-x-1/2"
+          initial={{ y: -30, opacity: 0 }}
+          animate={{ y: isHovering ? 10 : -30, opacity: isHovering ? 1 : 0 }}
+          transition={{ duration: 0.4 }}
         >
           <motion.img
             src="/arrow.svg"
             alt="Меню"
-            className="h-full w-full object-contain"
+            className="h-6 w-6 object-contain"
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.4 }}
           />
-        </button>
-      </motion.div>
+        </motion.div>
+      </div>
 
       {/* Аватарка (Кабинет кибера) */}
       <Link to="/profile" className="absolute top-4 right-4 z-30 flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60">
