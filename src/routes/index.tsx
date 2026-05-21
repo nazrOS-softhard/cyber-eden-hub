@@ -96,21 +96,81 @@ function Landing() {
         </motion.div>
       </main>
 
-      {/* Bottom HUD strip */}
+      {/* Bottom HUD strip — анимированный */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.4, duration: 0.6 }}
-        className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between px-5 py-3 font-mono text-[10px] tracking-widest text-foreground/50 md:px-8"
+        className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between px-5 py-3 font-mono text-[10px] tracking-widest md:px-8"
       >
         <div className="flex items-center gap-4">
-          <span>UPLINK · 1.2 Gbit</span>
+          <motion.span
+            animate={{
+              color: ["#ffffff", "#00ffff", "#ff00ff", "#ffffff"],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            UPLINK
+          </motion.span>
+          <span className="text-foreground/30">·</span>
+          <motion.span
+            animate={{
+              color: ["#ffffff", "#ff0040", "#ff4d4d", "#ffffff"],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            1.2 Gbit
+          </motion.span>
           <span className="text-foreground/30">|</span>
-          <span className="hidden sm:inline">XP · 18,420</span>
+          <motion.span
+            animate={{
+              color: ["#ffffff", "#00ff00", "#00ffff", "#ffffff"],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            XP · 18,420
+          </motion.span>
         </div>
+
         <div className="flex items-center gap-4">
-          <span className="text-neon animate-flicker">REC ●</span>
-          <span className="hidden sm:inline text-cyan">user_0xnazr</span>
+          <motion.span
+            animate={{
+              color: ["#ff0040", "#ff4d4d", "#ff0040"],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="text-neon"
+          >
+            REC ●
+          </motion.span>
+          <motion.span
+            animate={{
+              color: ["#00ffff", "#00bfff", "#00ffff"],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="hidden sm:inline text-cyan"
+          >
+            user_0xnazr
+          </motion.span>
         </div>
       </motion.div>
     </div>
