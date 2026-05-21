@@ -35,10 +35,8 @@ export function TopNav() {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {/* Стрелка — появляется при наведении */}
-      <div
-        className="absolute inset-x-0 top-0 z-40 h-24 flex items-center justify-center"
-      >
+      {/* Стрелка — появляется при наведении, клик только здесь */}
+      <div className="absolute inset-x-0 top-0 z-40 h-24 flex items-center justify-center">
         <motion.div
           className="flex items-center justify-center"
           initial={{ y: -30, opacity: 0 }}
@@ -56,7 +54,7 @@ export function TopNav() {
         </motion.div>
       </div>
 
-      {/* Аватарка (Кабинет кибера) */}
+      {/* Аватарка (Кабинет кибера) — кликабельна */}
       <Link
         to="/profile"
         className="absolute top-4 right-4 z-30 flex items-center gap-3 rounded-full border border-border bg-background/30 py-1 pl-3 pr-1 backdrop-blur-xl transition-all hover:border-[var(--cyan)]/60"
@@ -84,8 +82,8 @@ export function TopNav() {
             transition={{ duration: 0.3 }}
             className="absolute inset-x-0 top-0 flex items-center justify-center px-5 py-4 md:px-8 bg-black/80 backdrop-blur-xl border-b border-white/10"
           >
-            {/* Логотип — в одну строку */}
-            <Link to="/" className="group flex items-center gap-3">
+            {/* Логотип — прижат к левому краю */}
+            <Link to="/" className="group flex items-center gap-1">
               <div className="relative h-10 w-10">
                 <motion.img
                   src="/cybereden-logo.svg"
@@ -108,7 +106,7 @@ export function TopNav() {
               </div>
             </Link>
 
-            {/* Центральное меню */}
+            {/* Центральное меню — кликабельные ссылки */}
             <nav className="pointer-events-auto flex items-center justify-center gap-1 rounded-full border border-border bg-background/30 px-3 py-1.5 backdrop-blur-xl">
               {leftItems.map((it) => (
                 <Link
