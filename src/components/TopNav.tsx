@@ -13,8 +13,6 @@ const items = [
 
 export function TopNav() {
   const [isOpen, setIsOpen] = useState(false);
-  const [shurikenColor, setShurikenColor] = useState("#8a2be2");
-  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
   return (
     <div
@@ -22,7 +20,7 @@ export function TopNav() {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      {/* Логотип — тёмный текст с прозрачностью */}
+      {/* Логотип — сурикен с текстом */}
       <Link to="/" className="absolute left-0 top-0 z-40 p-4">
         <div className="relative w-12 h-12">
           <motion.img
@@ -31,10 +29,11 @@ export function TopNav() {
             className="h-full w-full object-contain"
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
-            style={{ filter: `drop-shadow(0 0 20px ${shurikenColor})` }}
           />
           <div className="absolute inset-0 flex items-center justify-center cursor-pointer">
-            <span className="font-bold text-[4px] text-zinc-900 opacity-50">КиберэдэН</span>
+            <span className="font-bold text-[8px] text-white/80 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+              КиберэдэН
+            </span>
           </div>
         </div>
       </Link>
